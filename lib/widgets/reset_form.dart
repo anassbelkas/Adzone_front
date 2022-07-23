@@ -9,9 +9,9 @@ class ResetForm extends StatelessWidget {
       child: TextFormField(
         decoration: InputDecoration(
             hintText: 'Email',
-            hintStyle: TextStyle(color: kTextFieldColor),
+            hintStyle: TextStyle(color: kWhiteColor),
             focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kPrimaryColor))),
+                borderSide: BorderSide(color: kWhiteColor))),
       ),
     );
   }

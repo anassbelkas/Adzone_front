@@ -21,7 +21,11 @@ class SignUpScreen extends StatelessWidget {
               padding: kDefaultPadding,
               child: Text(
                 'Create Account',
-                style: titleText,
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: kWhiteColor,
+                ),
               ),
             ),
             SizedBox(
@@ -49,7 +53,7 @@ class SignUpScreen extends StatelessWidget {
                       'Log In',
                       style: textButton.copyWith(
                         decoration: TextDecoration.underline,
-                        decorationThickness: 1,
+                        decorationThickness: 2,
                       ),
                     ),
                   )
@@ -91,7 +95,7 @@ class SignUpScreen extends StatelessWidget {
               padding: kDefaultPadding,
               child: Text(
                 'Or log in with:',
-                style: subTitle.copyWith(color: kBlackColor),
+                style: subTitle.copyWith(color: kWhiteColor),
               ),
             ),
             SizedBox(
@@ -107,6 +111,7 @@ class SignUpScreen extends StatelessWidget {
           ],
         ),
       ),
+      backgroundColor: kPrimaryColor,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup_ui_starter/screens/login.dart';
+import 'package:login_signup_ui_starter/screens/splash.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'Poppins'),
-      home: LogInScreen(),
+      home: Splash(),
     );
   }
 }

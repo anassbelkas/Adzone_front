@@ -18,7 +18,11 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
             Text(
               'Reset Password',
-              style: titleText,
+              style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: kWhiteColor,
+                ),
             ),
             SizedBox(
               height: 5,
@@ -28,11 +32,11 @@ class ResetPasswordScreen extends StatelessWidget {
               style: subTitle.copyWith(fontWeight: FontWeight.w600),
             ),
             SizedBox(
-              height: 10,
+              height: 5,
             ),
             ResetForm(),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
             GestureDetector(
                 onTap: () {
@@ -46,6 +50,7 @@ class ResetPasswordScreen extends StatelessWidget {
           ],
         ),
       ),
+      backgroundColor: kPrimaryColor,
     );
   }
 }

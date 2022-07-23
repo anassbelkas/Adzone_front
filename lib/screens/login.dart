@@ -21,7 +21,11 @@ class LogInScreen extends StatelessWidget {
               ),
               Text(
                 'Welcome Back',
-                style: titleText,
+                style: TextStyle(
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold,
+                  color: kWhiteColor,
+                ),
               ),
               SizedBox(
                 height: 5,
@@ -48,7 +52,7 @@ class LogInScreen extends StatelessWidget {
                       'Sign Up',
                       style: textButton.copyWith(
                         decoration: TextDecoration.underline,
-                        decorationThickness: 1,
+                        decorationThickness: 2,
                       ),
                     ),
                   ),
@@ -71,8 +75,8 @@ class LogInScreen extends StatelessWidget {
                 child: Text(
                   'Forgot password?',
                   style: TextStyle(
-                    color: kZambeziColor,
-                    fontSize: 14,
+                    color: kSecondaryColor,
+                    fontSize: 15,
                     decoration: TextDecoration.underline,
                     decorationThickness: 1,
                   ),
@@ -89,7 +93,7 @@ class LogInScreen extends StatelessWidget {
               ),
               Text(
                 'Or log in with:',
-                style: subTitle.copyWith(color: kBlackColor),
+                style: subTitle.copyWith(color: kWhiteColor),
               ),
               SizedBox(
                 height: 20,
@@ -99,6 +103,7 @@ class LogInScreen extends StatelessWidget {
           ),
         ),
       ),
+      backgroundColor: kPrimaryColor,
     );
   }
 }

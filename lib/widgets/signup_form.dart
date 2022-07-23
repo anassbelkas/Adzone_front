@@ -29,9 +29,9 @@ class _SignUpFormState extends State<SignUpForm> {
           obscureText: pass ? _isObscure : false,
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(color: kTextFieldColor),
+            hintStyle: TextStyle(color: kWhiteColor),
             focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kPrimaryColor)),
+                borderSide: BorderSide(color: kWhiteColor)),
             suffixIcon: pass
                 ? IconButton(
                     onPressed: () {
@@ -42,11 +42,11 @@ class _SignUpFormState extends State<SignUpForm> {
                     icon: _isObscure
                         ? Icon(
                             Icons.visibility_off,
-                            color: kTextFieldColor,
+                            color: kWhiteColor,
                           )
                         : Icon(
                             Icons.visibility,
-                            color: kPrimaryColor,
+                            color: kWhiteColor,
                           ))
                 : null,
           ),

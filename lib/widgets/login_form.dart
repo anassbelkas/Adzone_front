@@ -26,10 +26,10 @@ class _LogInFormState extends State<LogInForm> {
         decoration: InputDecoration(
             labelText: label,
             labelStyle: TextStyle(
-              color: kTextFieldColor,
+              color: kWhiteColor,
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kPrimaryColor),
+              borderSide: BorderSide(color: kWhiteColor),
             ),
             suffixIcon: pass
                 ? IconButton(
@@ -41,11 +41,11 @@ class _LogInFormState extends State<LogInForm> {
                     icon: _isObscure
                         ? Icon(
                             Icons.visibility_off,
-                            color: kTextFieldColor,
+                            color: kWhiteColor,
                           )
                         : Icon(
                             Icons.visibility,
-                            color: kPrimaryColor,
+                            color: kWhiteColor,
                           ),
                   )
                 : null),
