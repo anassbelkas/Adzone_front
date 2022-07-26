@@ -19,10 +19,10 @@ class ResetPasswordScreen extends StatelessWidget {
             Text(
               'Reset Password',
               style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: kWhiteColor,
-                ),
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                color: kWhiteColor,
+              ),
             ),
             SizedBox(
               height: 5,

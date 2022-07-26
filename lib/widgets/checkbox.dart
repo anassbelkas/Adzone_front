@@ -43,9 +43,10 @@ class _CheckBoxState extends State<CheckBox> {
             Text(
               widget.text,
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: kSecondaryColor,
-                ),),
+                fontWeight: FontWeight.bold,
+                color: kSecondaryColor,
+              ),
+            ),
           ],
         )
       ],

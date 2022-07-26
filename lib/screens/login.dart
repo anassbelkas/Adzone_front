@@ -5,10 +5,19 @@ import 'package:login_signup_ui_starter/theme.dart';
 import 'package:login_signup_ui_starter/widgets/login_form.dart';
 import 'package:login_signup_ui_starter/widgets/login_option.dart';
 import 'package:login_signup_ui_starter/widgets/primary_button.dart';
+import 'package:eventify/eventify.dart';
+
+final EventEmitter emitter = new EventEmitter();
 
 class LogInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    PrimaryButton _primaryButton = PrimaryButton(
+      buttonText: 'Log In',
+    );
+    LogInForm _logInForm = LogInForm();
+    //run function after 5 seconds
+
     return Scaffold(
       body: Padding(
         padding: kDefaultPadding,
@@ -61,7 +70,7 @@ class LogInScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              LogInForm(),
+              _logInForm,
               SizedBox(
                 height: 20,
               ),
@@ -85,8 +94,12 @@ class LogInScreen extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              PrimaryButton(
-                buttonText: 'Log In',
+              GestureDetector(
+                onTap: () {
+                  _primaryButton.changeState('animate');
+                  _logInForm.validate();
+                },
+                child: _primaryButton,
               ),
               SizedBox(
                 height: 20,
