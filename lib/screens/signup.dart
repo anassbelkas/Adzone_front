@@ -1,3 +1,4 @@
+import 'package:adzone/screens/otp.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/screens/login.dart';
 import 'package:adzone/theme.dart';
@@ -86,8 +87,20 @@ class SignUpScreen extends StatelessWidget {
             ),
             Padding(
               padding: kDefaultPadding,
-              child: PrimaryButton(buttonText: 'Sign Up'),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Otp()));
+                },
+                child: PrimaryButton(buttonText: 'Sign Up'),
+              ),
             ),
+            // Padding(
+            //   padding: kDefaultPadding,
+            //   child: PrimaryButton(buttonText: 'Sign Up'),
+            // ),
             SizedBox(
               height: 20,
             ),

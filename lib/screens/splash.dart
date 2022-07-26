@@ -1,3 +1,4 @@
+import 'package:adzone/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/screens/login.dart';
 import 'package:adzone/theme.dart';
@@ -36,7 +37,7 @@ _navigatetohome() async{
           if (await _authenticationApi.isLoggedIn()) {
             return Navbar();
           } else {
-            return LogInScreen();
+            return Welcome();
           }
         },
         splashTransition: SplashTransition.fadeTransition,
