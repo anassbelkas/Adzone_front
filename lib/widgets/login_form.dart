@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup_ui_starter/theme.dart';
+import 'package:adzone/theme.dart';
 import 'package:eventify/eventify.dart';
 
 final EventEmitter emitter = new EventEmitter();
 
+class LoginController {
+  var validate;
+  var getFormData;
+
+  void dispose() {
+    validate = null;
+    getFormData = null;
+  }
+}
+
 class LogInForm extends StatefulWidget {
   final _LogInFormState _formState = _LogInFormState();
+  final LoginController controller;
+  LogInForm({
+    @required this.controller,
+  }) : assert(controller != null);
   @override
   _LogInFormState createState() => _formState;
-  //return form fields as json
-  Map<String, dynamic> getFormFields() {
-    return {
-      'email': _formState._emailController.text,
-      'password': _formState._passwordController.text,
-    };
-  }
 
   //validate emitter
   void validate() {
@@ -28,6 +35,25 @@ class _LogInFormState extends State<LogInForm> {
   final _passwordController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.validate = () {
+      //check validation form fields
+      if (_formKey.currentState.validate()) {
+        //validation success
+        return true;
+      }
+      return false;
+    };
+    widget.controller.getFormData = () {
+      //return form fields as json
+      return {
+        'email': _emailController.text,
+        'password': _passwordController.text,
+      };
+    };
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -1,27 +1,26 @@
 import 'package:dio/dio.dart';
-import 'package:login_signup_ui_starter/models/user.dart';
-import 'package:login_signup_ui_starter/utils/constants.dart';
+import 'package:adzone/models/user.dart';
+import 'package:adzone/utils/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthenticationApi {
   final Dio _dio = new Dio();
   final storage = new FlutterSecureStorage();
 
-  Future<String> login(String email, String password) async {
+  Future<Map<String, dynamic>> login(String email, String password) async {
     try {
       final response = await _dio.post(SERVER_URL + '/auth/signin',
           data: {"email": email, "password": password});
-
       if (response.statusCode == 200) {
         final token = response.data['token'];
         storage.write(key: 'token', value: token);
-        return "Login Successful";
+        return response.data;
       } else {
-        throw Exception(response.data['msg']);
+        return response.data;
       }
     } catch (e) {
-      print(e);
-      return e.toString();
+      // print(e);
+      return e.response.data;
     }
   }
 
@@ -95,6 +94,21 @@ class AuthenticationApi {
     } catch (e) {
       print(e);
       return e.toString();
+    }
+  }
+
+  //check user logged in
+  Future<bool> isLoggedIn() async {
+    try {
+      final token = await storage.read(key: 'token');
+      if (token != null) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
     }
   }
 }

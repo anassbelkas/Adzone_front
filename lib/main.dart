@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup_ui_starter/screens/splash.dart';
+import 'package:adzone/screens/splash.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup_ui_starter/theme.dart';
+import 'package:adzone/theme.dart';
 import 'package:eventify/eventify.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
@@ -9,7 +9,7 @@ class PrimaryButton extends StatefulWidget {
   String buttonText;
   Function onPressed;
   PrimaryButton({@required this.buttonText});
-  _PrimaryButton __primaryButton = _PrimaryButton(buttonText: 'ff');
+  _PrimaryButton __primaryButton = _PrimaryButton();
   @override
   State<StatefulWidget> createState() {
     return __primaryButton;
@@ -24,10 +24,12 @@ class PrimaryButton extends StatefulWidget {
 class _PrimaryButton extends State<PrimaryButton> {
   String buttonText;
   bool isAnimated = false;
-  _PrimaryButton({@required this.buttonText});
+  // _PrimaryButton({@required this.buttonText});
 
   @override
   Widget build(BuildContext context) {
+    buttonText = widget.buttonText;
+    // buttonText = 'Log In';
     emitter.on('changeState', null, (ev, ctx) {
       if (ev.eventData == 'animate') {
         setState(() {
@@ -54,7 +56,7 @@ class _PrimaryButton extends State<PrimaryButton> {
             )
           : Text(
               buttonText,
-              style: TextStyle(color: kPrimaryColor, fontSize: 20),
+              style: textButton.copyWith(color: kPrimaryColor),
             ),
     );
   }

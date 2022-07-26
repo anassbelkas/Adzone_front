@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup_ui_starter/screens/login.dart';
-import 'package:login_signup_ui_starter/theme.dart';
+import 'package:adzone/screens/login.dart';
+import 'package:adzone/theme.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:adzone/providers/authentication.dart';
+import 'package:adzone/widgets/navbar.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -9,6 +11,7 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  AuthenticationApi _authenticationApi = AuthenticationApi();
   @override
   void initState() {
     super.initState();
@@ -27,11 +30,14 @@ _navigatetohome() async{
         splash: Image(
           image: AssetImage('images/AD.png'),
         ),
-        duration: 20000,
+        duration: 2000,
         screenFunction: () async {
-          // Your code here
-
-          return LogInScreen();
+          // print isloggedin
+          if (await _authenticationApi.isLoggedIn()) {
+            return Navbar();
+          } else {
+            return LogInScreen();
+          }
         },
         splashTransition: SplashTransition.fadeTransition,
         backgroundColor: kWhiteColor);

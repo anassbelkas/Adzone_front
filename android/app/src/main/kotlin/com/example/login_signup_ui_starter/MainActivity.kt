@@ -1,4 +1,4 @@
-package com.example.login_signup_ui_starter
+package com.example.adzone
 
 import io.flutter.embedding.android.FlutterActivity
 

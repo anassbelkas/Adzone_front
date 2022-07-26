@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup_ui_starter/screens/reset_password.dart';
-import 'package:login_signup_ui_starter/screens/signup.dart';
-import 'package:login_signup_ui_starter/theme.dart';
-import 'package:login_signup_ui_starter/widgets/login_form.dart';
-import 'package:login_signup_ui_starter/widgets/login_option.dart';
-import 'package:login_signup_ui_starter/widgets/primary_button.dart';
-import 'package:eventify/eventify.dart';
-
-final EventEmitter emitter = new EventEmitter();
+import 'package:adzone/screens/reset_password.dart';
+import 'package:adzone/screens/signup.dart';
+import 'package:adzone/theme.dart';
+import 'package:adzone/widgets/login_form.dart';
+import 'package:adzone/widgets/login_option.dart';
+import 'package:adzone/widgets/navbar.dart';
+import 'package:adzone/widgets/primary_button.dart';
+import 'package:adzone/providers/authentication.dart';
 
 class LogInScreen extends StatelessWidget {
+  final LoginController _loginController = LoginController();
+  final AuthenticationApi _authenticationApi = AuthenticationApi();
+
   @override
   Widget build(BuildContext context) {
     PrimaryButton _primaryButton = PrimaryButton(
       buttonText: 'Log In',
     );
-    LogInForm _logInForm = LogInForm();
+    LogInForm _logInForm = LogInForm(controller: _loginController);
     //run function after 5 seconds
 
     return Scaffold(
@@ -96,8 +98,54 @@ class LogInScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  _primaryButton.changeState('animate');
-                  _logInForm.validate();
+                  if (_loginController.validate()) {
+                    _primaryButton.changeState('animate');
+                    var formData = _loginController.getFormData();
+                    print(formData['email']);
+                    _authenticationApi
+                        .login(formData['email'], formData['password'])
+                        .then((value) {
+                      print(value);
+                      if (value['success']) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Navbar(),
+                          ),
+                        );
+                      } else {
+                        _primaryButton.changeState('idle');
+                        showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text('Error'),
+                            content: Text(value['msg']),
+                            actions: [
+                              FlatButton(
+                                child: Text('Ok'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              )
+                            ],
+                          ),
+                        );
+                      }
+                      // if (value) {
+                      //   Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (context) => Navbar(),
+                      //     ),
+                      //   );
+                      // }
+                    });
+                  }
+                  // _logInForm.validate();
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (context) => Navbar()));
+                  // _myController.onIncrement();
+                  // print();
                 },
                 child: _primaryButton,
               ),

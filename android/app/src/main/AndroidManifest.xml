@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.login_signup_ui_starter">
+    package="com.example.adzone">
    <application
-        android:label="login_signup_ui_starter"
+        android:label="adzone"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
