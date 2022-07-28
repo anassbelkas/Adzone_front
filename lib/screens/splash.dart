@@ -33,6 +33,7 @@ _navigatetohome() async{
         ),
         duration: 2000,
         screenFunction: () async {
+          await _authenticationApi.logout();
           // print isloggedin
           if (await _authenticationApi.isLoggedIn()) {
             return Navbar();

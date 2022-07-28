@@ -7,10 +7,12 @@ final EventEmitter emitter = new EventEmitter();
 class LoginController {
   var validate;
   var getFormData;
+  var setError;
 
   void dispose() {
     validate = null;
     getFormData = null;
+    setError = null;
   }
 }
 
@@ -33,7 +35,7 @@ class _LogInFormState extends State<LogInForm> {
   bool _isObscure = true;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
+  String errorMessage = '';
   final _formKey = GlobalKey<FormState>();
   @override
   void initState() {
@@ -52,6 +54,12 @@ class _LogInFormState extends State<LogInForm> {
         'email': _emailController.text,
         'password': _passwordController.text,
       };
+    };
+    widget.controller.setError = (String error) {
+      //set error message
+      setState(() {
+        errorMessage = error;
+      });
     };
   }
 
@@ -86,6 +94,11 @@ class _LogInFormState extends State<LogInForm> {
         },
         decoration: InputDecoration(
             labelText: label,
+            errorText: pass
+                ? errorMessage?.isNotEmpty == true
+                    ? errorMessage
+                    : null
+                : null,
             labelStyle: TextStyle(
               color: kWhiteColor,
             ),

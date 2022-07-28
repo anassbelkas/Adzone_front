@@ -1,3 +1,4 @@
+import 'package:adzone/widgets/alert/alert_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/screens/reset_password.dart';
 import 'package:adzone/screens/signup.dart';
@@ -7,17 +8,58 @@ import 'package:adzone/widgets/login_option.dart';
 import 'package:adzone/widgets/navbar.dart';
 import 'package:adzone/widgets/primary_button.dart';
 import 'package:adzone/providers/authentication.dart';
+import 'package:adzone/widgets/alert/alert.dart';
 
 class LogInScreen extends StatelessWidget {
   final LoginController _loginController = LoginController();
   final AuthenticationApi _authenticationApi = AuthenticationApi();
+  bool _isDisabled = false;
+  PrimaryButton _primaryButton = PrimaryButton(
+    buttonText: 'Log In',
+  );
+
+  void _login(BuildContext context, Alert _alert) async {
+    if (_isDisabled) {
+      return;
+    }
+    if (_loginController.validate()) {
+      _isDisabled = true;
+      _primaryButton.changeState('animate');
+      var formData = _loginController.getFormData();
+      print(formData['email']);
+      //delay 5 seconds
+
+      _authenticationApi
+          .login(formData['email'], formData['password'])
+          .then((value) {
+        if (value['success']) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => Navbar(),
+            ),
+          );
+        } else {
+          _isDisabled = false;
+          _primaryButton.changeState('idle');
+          _loginController.setError(value['msg']);
+          // _alert.showAlert(
+          //     msg: value['msg'],
+          //     title: 'Error',
+          //     btnText: 'Ok',
+          //     onPressed: () {
+          //       Navigator.pop(context);
+          //     },
+          //     animation: AlertAnimation.error);
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    PrimaryButton _primaryButton = PrimaryButton(
-      buttonText: 'Log In',
-    );
     LogInForm _logInForm = LogInForm(controller: _loginController);
+    Alert _alert = Alert(context);
     //run function after 5 seconds
 
     return Scaffold(
@@ -98,54 +140,7 @@ class LogInScreen extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  if (_loginController.validate()) {
-                    _primaryButton.changeState('animate');
-                    var formData = _loginController.getFormData();
-                    print(formData['email']);
-                    _authenticationApi
-                        .login(formData['email'], formData['password'])
-                        .then((value) {
-                      print(value);
-                      if (value['success']) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Navbar(),
-                          ),
-                        );
-                      } else {
-                        _primaryButton.changeState('idle');
-                        showDialog(
-                          context: context,
-                          builder: (context) => AlertDialog(
-                            title: Text('Error'),
-                            content: Text(value['msg']),
-                            actions: [
-                              FlatButton(
-                                child: Text('Ok'),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                              )
-                            ],
-                          ),
-                        );
-                      }
-                      // if (value) {
-                      //   Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (context) => Navbar(),
-                      //     ),
-                      //   );
-                      // }
-                    });
-                  }
-                  // _logInForm.validate();
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (context) => Navbar()));
-                  // _myController.onIncrement();
-                  // print();
+                  _login(context, _alert);
                 },
                 child: _primaryButton,
               ),

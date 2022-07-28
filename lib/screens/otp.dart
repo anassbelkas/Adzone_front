@@ -70,7 +70,7 @@ class _OtpState extends State<Otp> {
                 height: 28,
               ),
               Container(
-                padding: EdgeInsets.all(29),
+                padding: EdgeInsets.only(top: 29, bottom: 29),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12),
@@ -78,7 +78,7 @@ class _OtpState extends State<Otp> {
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         _textFieldOTP(first: true, last: false),
                         _textFieldOTP(first: false, last: false),
@@ -153,6 +153,8 @@ class _OtpState extends State<Otp> {
   Widget _textFieldOTP({bool first, last}) {
     return Container(
       height: 45,
+      //margin of container
+      width: 45,
       child: AspectRatio(
         aspectRatio: 1.0,
         child: TextField(
@@ -172,6 +174,9 @@ class _OtpState extends State<Otp> {
           keyboardType: TextInputType.text,
           maxLength: 1,
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(
+              bottom: 45 / 2,
+            ),
             counter: Offstage(),
             enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(width: 2, color: Colors.black12),
