@@ -43,14 +43,6 @@ class LogInScreen extends StatelessWidget {
           _isDisabled = false;
           _primaryButton.changeState('idle');
           _loginController.setError(value['msg']);
-          // _alert.showAlert(
-          //     msg: value['msg'],
-          //     title: 'Error',
-          //     btnText: 'Ok',
-          //     onPressed: () {
-          //       Navigator.pop(context);
-          //     },
-          //     animation: AlertAnimation.error);
         }
       });
     }

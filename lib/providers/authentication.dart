@@ -24,8 +24,8 @@ class AuthenticationApi {
     }
   }
 
-  Future<String> signup(String first_name, String last_name, String email,
-      String password) async {
+  Future<Map<String, dynamic>> signup(String first_name, String last_name,
+      String email, String password) async {
     try {
       final response = await _dio.post(SERVER_URL + '/auth/signup', data: {
         "first_name": first_name,
@@ -34,14 +34,9 @@ class AuthenticationApi {
         "password": password
       });
 
-      if (response.statusCode == 200) {
-        return response.data['msg'];
-      } else {
-        throw Exception(response.data['msg']);
-      }
+      return response.data;
     } catch (e) {
-      print(e);
-      return e.toString();
+      return e.response.data;
     }
   }
 

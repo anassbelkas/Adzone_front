@@ -35,8 +35,8 @@ class _LogInFormState extends State<LogInForm> {
   bool _isObscure = true;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  String errorMessage = '';
   final _formKey = GlobalKey<FormState>();
+  String errorMessage = '';
   @override
   void initState() {
     super.initState();

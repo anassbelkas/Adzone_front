@@ -6,10 +6,54 @@ import 'package:adzone/widgets/checkbox.dart';
 import 'package:adzone/widgets/login_option.dart';
 import 'package:adzone/widgets/primary_button.dart';
 import 'package:adzone/widgets/signup_form.dart';
+import 'package:adzone/providers/authentication.dart';
 
 class SignUpScreen extends StatelessWidget {
+  SignUpController _signUpController = SignUpController();
+  final AuthenticationApi _authenticationApi = AuthenticationApi();
+  PrimaryButton _primaryButton = PrimaryButton(
+    buttonText: 'Sign Up',
+  );
+  CheckBoxController _checkBoxController = CheckBoxController();
+  CheckBoxController _checkBoxController2 = CheckBoxController();
+  bool _isDisabled = false;
+
+  void _signUp(BuildContext context) async {
+    if (_signUpController.validate()) {
+      if (_checkBoxController.validate() && _checkBoxController2.validate()) {
+        _isDisabled = true;
+        _primaryButton.changeState('animate');
+        var formData = _signUpController.getFormData();
+        print(formData['email']);
+        //delay 5 seconds
+        _authenticationApi
+            .signup(formData['firstName'], formData['lastName'],
+                formData['email'], formData['password'])
+            .then((value) {
+          if (value['success']) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Otp(),
+              ),
+            );
+          } else {
+            _primaryButton.changeState('idle');
+            _signUpController.setError(value['msg']);
+          }
+        });
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    SignUpForm _signUpForm = SignUpForm(controller: _signUpController);
+    CheckBox _checkBox = CheckBox('I agree to the terms and conditions',
+        controller: _checkBoxController);
+    CheckBox _checkBox2 = CheckBox('I have at least 18 years old.',
+        controller: _checkBoxController2);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -66,21 +110,21 @@ class SignUpScreen extends StatelessWidget {
             ),
             Padding(
               padding: kDefaultPadding,
-              child: SignUpForm(),
+              child: _signUpForm,
             ),
             SizedBox(
               height: 20,
             ),
             Padding(
               padding: kDefaultPadding,
-              child: CheckBox('Agree to terms and conditions.'),
+              child: _checkBox,
             ),
             SizedBox(
               height: 20,
             ),
             Padding(
               padding: kDefaultPadding,
-              child: CheckBox('I have at least 18 years old.'),
+              child: _checkBox2,
             ),
             SizedBox(
               height: 20,
@@ -89,12 +133,11 @@ class SignUpScreen extends StatelessWidget {
               padding: kDefaultPadding,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Otp()));
+                  if (!_isDisabled) {
+                    _signUp(context);
+                  }
                 },
-                child: PrimaryButton(buttonText: 'Sign Up'),
+                child: _primaryButton,
               ),
             ),
             // Padding(
