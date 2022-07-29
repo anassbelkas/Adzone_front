@@ -1,192 +1,215 @@
 import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:spring/spring.dart';
 
-class Otp extends StatefulWidget {
-  const Otp({Key key}) : super(key: key);
+class OTPScreen extends StatelessWidget {
+  final _formKey = GlobalKey<FormState>();
+  String userEmail;
+  OTPScreen({Key key, @required this.userEmail}) : super(key: key);
 
-  @override
-  _OtpState createState() => _OtpState();
-}
-
-class _OtpState extends State<Otp> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff7f6fb),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(
-                    Icons.arrow_back,
-                    size: 32,
-                    color: Colors.black54,
+      resizeToAvoidBottomInset: true,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SizedBox(
+            height: 104,
+          ),
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 40),
+            child: Column(
+              children: [
+                Text(
+                  'Enter your verification code',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: GoogleFonts.workSans().fontFamily,
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50,
-                  shape: BoxShape.circle,
+                SizedBox(
+                  height: 25,
                 ),
-                child: Image.asset(
-                  'images/AD.png',
+                Text(
+                  'Enter the 6-characters code we have sent to',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: GoogleFonts.workSans().fontFamily,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Text(
-                'Verification',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+                Text(
+                  userEmail,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontFamily: GoogleFonts.workSans().fontFamily,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Enter your OTP code number",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
+                SizedBox(
+                  height: 70,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 28,
-              ),
-              Container(
-                padding: EdgeInsets.only(top: 29, bottom: 29),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _textFieldOTP(first: true, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: false),
-                        _textFieldOTP(first: false, last: true),
-                      ],
+                Container(
+                    height: 70,
+                    width: size.width,
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+                    decoration: BoxDecoration(
+                      // color: Colors.purple,
+                      borderRadius: BorderRadius.circular(4),
                     ),
-                    SizedBox(
-                      height: 22,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ButtonStyle(
-                          foregroundColor:
-                              MaterialStateProperty.all<Color>(kWhiteColor),
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(kPrimaryColor),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(24.0),
-                            ),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(14.0),
-                          child: Text(
-                            'Verify',
-                            style: TextStyle(fontSize: 16),
-                          ),
-                        ),
+                    child: Form(
+                      key: _formKey,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          VerificationTextField(first: true, last: false),
+                          VerificationTextField(first: false, last: false),
+                          VerificationTextField(first: false, last: false),
+                          VerificationTextField(first: false, last: false),
+                          VerificationTextField(first: false, last: false),
+                          VerificationTextField(first: false, last: true),
+                        ],
                       ),
-                    )
-                  ],
+                    )),
+                SizedBox(height: 41),
+                Text(
+                  'Didn’t receive the code?',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: GoogleFonts.workSans().fontFamily,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text(
-                "Didn't you receive any code?",
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black38,
+                SizedBox(height: 12),
+                Text(
+                  'Resend code',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    decoration: TextDecoration.underline,
+                    fontFamily: GoogleFonts.workSans().fontFamily,
+                  ),
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(
-                height: 18,
-              ),
-              Text(
-                "Resend New Code",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: kPrimaryColor,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          Spacer(),
+          SizedBox(
+            // color: Colors.blue,
+            height: 103,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  //disable button when textfield is empty
+
+                  onPressed: () {
+                    _formKey.currentState.validate();
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color(0xFF161616),
+                    elevation: 0,
+                    shadowColor: Colors.transparent,
+                    fixedSize: Size(325, 50),
+                  ),
+                  child: Text(
+                    'Send code',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 88,
+          ),
+        ],
       ),
     );
   }
+}
 
-  Widget _textFieldOTP({bool first, last}) {
-    return Container(
-      height: 45,
-      //margin of container
-      width: 45,
-      child: AspectRatio(
-        aspectRatio: 1.0,
-        child: TextField(
-          autofocus: true,
-          onChanged: (value) {
-            if (value.length == 1 && last == false) {
-              FocusScope.of(context).nextFocus();
-            }
-            if (value.length == 0 && first == false) {
-              FocusScope.of(context).previousFocus();
-            }
-          },
-          showCursor: false,
-          readOnly: false,
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
-          keyboardType: TextInputType.text,
-          maxLength: 1,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(
-              bottom: 45 / 2,
-            ),
-            counter: Offstage(),
-            enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: kPrimaryColor),
-                borderRadius: BorderRadius.circular(12)),
+class VerificationTextField extends StatefulWidget {
+  final bool first;
+  final bool last;
+  VerificationTextField({this.first, this.last});
+  @override
+  _VerificationTextFieldState createState() => _VerificationTextFieldState();
+}
+
+class _VerificationTextFieldState extends State<VerificationTextField> {
+  final SpringController _springController =
+      SpringController(initialAnim: Motion.pause);
+  Color _borderColor = Colors.grey.withOpacity(0.6);
+  @override
+  Widget build(BuildContext context) {
+    FocusNode focusNode = FocusNode();
+    return Spring.shake(
+        animDuration: Duration(milliseconds: 500),
+        springController: _springController,
+        child: Container(
+          width: 50,
+          height: 50,
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          decoration: BoxDecoration(
+            color: Color(0xFFF4F4F4),
+            borderRadius: BorderRadius.circular(4),
+            boxShadow: [
+              BoxShadow(
+                color: _borderColor,
+                spreadRadius: 2,
+                blurRadius: 2,
+                offset: Offset.zero,
+              ),
+            ],
           ),
-        ),
-      ),
-    );
+          child: TextFormField(
+            validator: (value) {
+              if (value.isEmpty) {
+                setState(() {
+                  _borderColor = kErrorColor;
+                });
+                _springController.play();
+                return null;
+              }
+              return null;
+            },
+            textAlign: TextAlign.center,
+            focusNode: focusNode,
+            maxLength: 1,
+            onChanged: (value) {
+              if (value.isNotEmpty) {
+                setState(() {
+                  _borderColor = Colors.grey.withOpacity(0.6);
+                  _springController.play(motion: Motion.pause);
+                });
+              }
+              if (value.length == 1 && !widget.last) {
+                focusNode.nextFocus();
+              } else if (value.length == 0 && !widget.first) {
+                focusNode.previousFocus();
+              }
+            },
+            style: TextStyle(
+              fontSize: 28,
+            ),
+            decoration: InputDecoration(
+              counterText: "",
+              // no border
+              border: InputBorder.none,
+            ),
+          ),
+        ));
   }
 }

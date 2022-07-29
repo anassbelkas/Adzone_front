@@ -38,26 +38,45 @@ class _PrimaryButton extends State<PrimaryButton> {
         });
       } else {
         setState(() {
-          buttonText = "Log In";
+          buttonText = "Sign in";
           isAnimated = false;
         });
       }
     });
-    return Container(
-      alignment: Alignment.center,
-      height: MediaQuery.of(context).size.height * 0.08,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(16), color: kWhiteColor),
-      child: isAnimated
-          ? SpinKitCircle(
-              color: kPrimaryColor,
-              size: 30,
-            )
-          : Text(
-              buttonText,
-              style: textButton.copyWith(color: kPrimaryColor),
+    return ElevatedButton(
+      onPressed: () {
+        if (isAnimated) {
+          return;
+        }
+        widget.onPressed();
+      },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.transparent),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+            side: BorderSide(
+              color: kWhiteColor,
+              width: 1,
             ),
+          ),
+        ),
+        shadowColor: MaterialStateProperty.all(Colors.transparent),
+      ),
+      child: Container(
+        alignment: Alignment.center,
+        height: MediaQuery.of(context).size.height * 0.08,
+        width: double.infinity,
+        child: isAnimated
+            ? SpinKitCircle(
+                color: kWhiteColor,
+                size: 30,
+              )
+            : Text(
+                buttonText,
+                style: textButton.copyWith(color: kWhiteColor),
+              ),
+      ),
     );
   }
 }

@@ -9,16 +9,18 @@ import 'package:adzone/widgets/navbar.dart';
 import 'package:adzone/widgets/primary_button.dart';
 import 'package:adzone/providers/authentication.dart';
 import 'package:adzone/widgets/alert/alert.dart';
+import 'package:material_dialogs/material_dialogs.dart';
 
 class LogInScreen extends StatelessWidget {
   final LoginController _loginController = LoginController();
   final AuthenticationApi _authenticationApi = AuthenticationApi();
+
   bool _isDisabled = false;
   PrimaryButton _primaryButton = PrimaryButton(
-    buttonText: 'Log In',
+    buttonText: 'Sign in',
   );
 
-  void _login(BuildContext context, Alert _alert) async {
+  void _login(BuildContext context) async {
     if (_isDisabled) {
       return;
     }
@@ -51,8 +53,8 @@ class LogInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LogInForm _logInForm = LogInForm(controller: _loginController);
-    Alert _alert = Alert(context);
     //run function after 5 seconds
+    _primaryButton.onPressed = () => _login(context);
 
     return Scaffold(
       body: Padding(
@@ -62,23 +64,78 @@ class LogInScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 120,
+                height: 60,
               ),
-              Text(
-                'Welcome Back',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: kWhiteColor,
-                ),
+              Container(
+                  //center child
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Hello, again ',
+                        //center text
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                          color: kWhiteColor,
+                        ),
+                      ),
+                      new RotationTransition(
+                        turns: AlwaysStoppedAnimation(15 / 360),
+                        child: Lottie.asset('animations/hand.json',
+                            height: 50, width: 50),
+                      )
+                    ],
+                  )),
+              SizedBox(
+                height: 60,
               ),
               SizedBox(
-                height: 5,
+                height: 10,
+              ),
+              _logInForm,
+              SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ResetPasswordScreen()));
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      'Forgot password?',
+                      style: TextStyle(
+                        color: kWhiteColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        decoration: TextDecoration.underline,
+                        decorationThickness: 1,
+                      ),
+                    ),
+                  )),
+
+              SizedBox(
+                height: 210,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 50),
+                child: _primaryButton,
+              ),
+
+              SizedBox(
+                height: 20,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'New to this app?',
+                    'Don’t have an account?',
                     style: subTitle,
                   ),
                   SizedBox(
@@ -103,50 +160,14 @@ class LogInScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
-              _logInForm,
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ResetPasswordScreen()));
-                },
-                child: Text(
-                  'Forgot password?',
-                  style: TextStyle(
-                    color: kSecondaryColor,
-                    fontSize: 15,
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 1,
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                onTap: () {
-                  _login(context, _alert);
-                },
-                child: _primaryButton,
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                'Or log in with:',
-                style: subTitle.copyWith(color: kWhiteColor),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              LoginOption(),
+              // Text(
+              //   'Or log in with:',
+              //   style: subTitle.copyWith(color: kWhiteColor),
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // LoginOption(),
             ],
           ),
         ),

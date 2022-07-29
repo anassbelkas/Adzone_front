@@ -1,3 +1,4 @@
+import 'package:adzone/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/screens/splash.dart';
 
@@ -10,8 +11,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'Poppins'),
-      home: Splash(),
+      theme: ThemeData(fontFamily: 'DM Sans'),
+      home: LogInScreen(),
     );
   }
 }

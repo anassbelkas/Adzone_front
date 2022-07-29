@@ -35,6 +35,7 @@ dependencies:
   flutter_spinkit: ^5.1.0
   material_dialogs: ^1.1.3
   spring: ^2.0.2
+  flutter_screenutil: ^5.5.3+2
 
 dev_dependencies:
   flutter_test:
@@ -80,7 +81,18 @@ flutter:
         - asset: fonts/Poppins-SemiBold.ttf
           weight: 600
         - asset: fonts/Poppins-Bold.ttf
+          weight: 700 
+    - family: DM Sans
+      fonts:
+        - asset: fonts/DMSans-Regular.ttf
+          weight: 400
+        - asset: fonts/DMSans-Bold.ttf
           weight: 700
+        - asset: fonts/DMSans-Italic.ttf
+          weight: 400
+          style: italic
+          
+    
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf

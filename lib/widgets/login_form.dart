@@ -72,58 +72,95 @@ class _LogInFormState extends State<LogInForm> {
       key: _formKey,
       child: Column(
         children: [
-          buildInputForm('Email', false, _emailController),
-          buildInputForm('Password', true, _passwordController),
+          buildInputForm('Your Email', 'Email', false, _emailController),
+          buildInputForm(
+              'Enter Password', 'Password', true, _passwordController),
         ],
       ),
     );
   }
 
   Padding buildInputForm(
-      String label, bool pass, TextEditingController controller) {
+      String hint, String label, bool pass, TextEditingController controller) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 5),
-      child: TextFormField(
-        obscureText: pass ? _isObscure : false,
-        controller: controller,
-        validator: (value) {
-          if (value.isEmpty) {
-            return 'Please enter some text';
-          }
-          return null;
-        },
-        decoration: InputDecoration(
-            labelText: label,
-            errorText: pass
-                ? errorMessage?.isNotEmpty == true
-                    ? errorMessage
-                    : null
-                : null,
-            labelStyle: TextStyle(
-              color: kWhiteColor,
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //label
+            Padding(
+              padding: EdgeInsets.all(5),
+              child: Text(
+                label,
+                style: TextStyle(fontSize: 14, color: kWhiteColor),
+              ),
             ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: kWhiteColor),
+            TextFormField(
+              obscureText: pass ? _isObscure : false,
+              controller: controller,
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+              decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  // floatingLabelBehavior: FloatingLabelBehavior.,
+                  hintText: hint,
+                  //drop shadow for input
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  // label: Container(
+                  //   padding: EdgeInsets.only(bottom: 40),
+                  //   child: Text(
+                  //     label,
+                  //     style: TextStyle(fontSize: 18, color: kWhiteColor),
+                  //   ),
+                  // ),
+                  hintStyle: TextStyle(color: Color(0xFF979797)),
+                  // enabledBorder: OutlineInputBorder(
+                  //   borderRadius: BorderRadius.circular(12.0),
+                  //   borderSide: BorderSide(color: Colors.white),
+                  // ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  errorText: pass
+                      ? errorMessage?.isNotEmpty == true
+                          ? errorMessage
+                          : null
+                      : null,
+                  labelStyle: TextStyle(
+                    color: kWhiteColor,
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide(color: kWhiteColor),
+                  ),
+                  suffixIcon: pass
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                          icon: _isObscure
+                              ? Icon(
+                                  Icons.visibility_off,
+                                  color: kWhiteColor,
+                                )
+                              : Icon(
+                                  Icons.visibility,
+                                  color: kWhiteColor,
+                                ),
+                        )
+                      : null),
             ),
-            suffixIcon: pass
-                ? IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _isObscure = !_isObscure;
-                      });
-                    },
-                    icon: _isObscure
-                        ? Icon(
-                            Icons.visibility_off,
-                            color: kWhiteColor,
-                          )
-                        : Icon(
-                            Icons.visibility,
-                            color: kWhiteColor,
-                          ),
-                  )
-                : null),
-      ),
-    );
+          ],
+        ));
   }
 }

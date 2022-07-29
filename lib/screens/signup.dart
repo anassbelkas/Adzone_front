@@ -34,7 +34,7 @@ class SignUpScreen extends StatelessWidget {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => Otp(),
+                builder: (context) => OTPScreen(userEmail: formData['email']),
               ),
             );
           } else {

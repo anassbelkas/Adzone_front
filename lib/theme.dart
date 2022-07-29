@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-const kPrimaryColor = Color.fromARGB(255, 255, 155, 121);
+const kPrimaryColor = Color(0xFFFA7850);
 const kSecondaryColor = Color.fromARGB(255, 91, 255, 247);
 const kErrorColor = Color.fromARGB(255, 175, 11, 11);
 const kDarkGreyColor = Color(0xFFA8A8A8);
-const kWhiteColor = Color(0xFFFFFFFF);
+const kWhiteColor = Color(0xFFFBFBFF);
 const kZambeziColor = Color(0xFF5B5B5B);
 const kBlackColor = Color(0xFF272726);
 const kTextFieldColor = Color(0xFF979797);
@@ -15,10 +15,10 @@ const kDefaultPadding = EdgeInsets.symmetric(horizontal: 30);
 TextStyle titleText =
     TextStyle(color: kWhiteColor, fontSize: 32, fontWeight: FontWeight.w700);
 TextStyle subTitle =
-    TextStyle(color: kWhiteColor, fontSize: 18, fontWeight: FontWeight.w500);
+    TextStyle(color: kWhiteColor, fontSize: 16, fontWeight: FontWeight.w400);
 TextStyle textButton = TextStyle(
-  color: kSecondaryColor,
-  fontSize: 18,
+  color: kWhiteColor,
+  fontSize: 16,
   fontWeight: FontWeight.w700,
 );
 
