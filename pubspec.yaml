@@ -18,13 +18,14 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.7.0 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^2.0.0
   animated_splash_screen: ^1.3.0
+  line_awesome_flutter: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,7 +47,6 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -81,7 +81,7 @@ flutter:
         - asset: fonts/Poppins-SemiBold.ttf
           weight: 600
         - asset: fonts/Poppins-Bold.ttf
-          weight: 700 
+          weight: 700
     - family: DM Sans
       fonts:
         - asset: fonts/DMSans-Regular.ttf
@@ -91,8 +91,7 @@ flutter:
         - asset: fonts/DMSans-Italic.ttf
           weight: 400
           style: italic
-          
-    
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
