@@ -1,3 +1,4 @@
+import 'package:adzone/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
 
@@ -15,7 +16,7 @@ class _NavbarState extends State<Navbar> {
   int index = 0;
 
   final screens = [
-    Home(),
+    HomeScreen(),
     Map(),
     Camera(),
     Profil(),
