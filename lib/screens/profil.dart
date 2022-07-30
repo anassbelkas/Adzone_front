@@ -1,4 +1,5 @@
 import 'package:adzone/screens/home.dart';
+import 'package:adzone/screens/rewards.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
 
@@ -116,7 +117,12 @@ class Profil extends StatelessWidget {
                           padding: EdgeInsets.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           primary: Colors.black),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Rewards()),
+                        );
+                      },
                       child: Icon(IconData(0xe09c,
                           fontFamily: 'MaterialIcons',
                           matchTextDirection: true)))
