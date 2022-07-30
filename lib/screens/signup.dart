@@ -54,31 +54,33 @@ class SignUpScreen extends StatelessWidget {
     CheckBox _checkBox2 = CheckBox('I have at least 18 years old.',
         controller: _checkBoxController2);
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    _primaryButton.onPressed = () => _signUp(context);
+    Column _column = Column(
+      //space between the elements
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 30),
+          child: Text(
+            'Create Account',
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: kWhiteColor,
+            ),
+          ),
+        ),
+        Column(
           children: [
-            SizedBox(
-              height: 70,
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 80),
+              child: _primaryButton,
             ),
             Padding(
-              padding: kDefaultPadding,
-              child: Text(
-                'Create Account',
-                style: TextStyle(
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold,
-                  color: kWhiteColor,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Padding(
-              padding: kDefaultPadding,
+              padding: EdgeInsets.symmetric(vertical: 50),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Already a member?',
@@ -104,69 +106,42 @@ class SignUpScreen extends StatelessWidget {
                   )
                 ],
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: _signUpForm,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: _checkBox,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: _checkBox2,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: GestureDetector(
-                onTap: () {
-                  if (!_isDisabled) {
-                    _signUp(context);
-                  }
-                },
-                child: _primaryButton,
-              ),
-            ),
-            // Padding(
-            //   padding: kDefaultPadding,
-            //   child: PrimaryButton(buttonText: 'Sign Up'),
-            // ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: Text(
-                'Or log in with:',
-                style: subTitle.copyWith(color: kWhiteColor),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: kDefaultPadding,
-              child: LoginOption(),
-            ),
-            SizedBox(
-              height: 20,
-            ),
+            )
           ],
+        )
+      ],
+    );
+
+    Column _column2 = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      //center
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: kDefaultPadding,
+          child: _signUpForm,
         ),
-      ),
+        SizedBox(
+          height: 20,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 60),
+          child: _checkBox,
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 60),
+          child: _checkBox2,
+        ),
+        SizedBox(
+          height: 150,
+        ),
+      ],
+    );
+    return Scaffold(
+      body: Stack(children: [_column, _column2]),
       backgroundColor: kPrimaryColor,
     );
   }

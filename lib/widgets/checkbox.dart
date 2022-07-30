@@ -23,7 +23,7 @@ class CheckBox extends StatefulWidget {
 
 class _CheckBoxState extends State<CheckBox> {
   bool _isSelected = false;
-  Color _borderColor = kBlackColor;
+  Color _borderColor = kWhiteColor;
   final SpringController _springController =
       SpringController(initialAnim: Motion.pause);
   @override
@@ -52,7 +52,7 @@ class _CheckBoxState extends State<CheckBox> {
               onTap: () {
                 setState(() {
                   _isSelected = !_isSelected;
-                  _borderColor = kBlackColor;
+                  _borderColor = kWhiteColor;
                   _springController.play(motion: Motion.pause);
                 });
               },
@@ -69,7 +69,7 @@ class _CheckBoxState extends State<CheckBox> {
                         ? Icon(
                             Icons.check,
                             size: 17,
-                            color: kSecondaryColor,
+                            color: kWhiteColor,
                           )
                         : null,
                   )),
@@ -81,7 +81,7 @@ class _CheckBoxState extends State<CheckBox> {
               widget.text,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
-                color: kSecondaryColor,
+                color: kWhiteColor,
               ),
             ),
           ],

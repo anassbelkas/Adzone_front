@@ -114,21 +114,32 @@ class _SignUpFormState extends State<SignUpForm> {
   Padding buildInputForm(String hint, bool pass, Function validator,
       {TextEditingController controller, bool error = false}) {
     return Padding(
-        padding: EdgeInsets.symmetric(vertical: 5),
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         child: TextFormField(
           validator: ((value) => validator(value)),
           controller: controller,
           obscureText: pass ? _isObscure : false,
           decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
             hintText: hint,
             errorText: error
                 ? errorMessage.isEmpty
                     ? null
                     : errorMessage
                 : null,
-            hintStyle: TextStyle(color: kWhiteColor),
-            focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: kWhiteColor)),
+            hintStyle: TextStyle(color: Color(0xFF979797)),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(12),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.white),
+              borderRadius: BorderRadius.circular(12),
+            ),
             suffixIcon: pass
                 ? IconButton(
                     onPressed: () {
@@ -139,11 +150,11 @@ class _SignUpFormState extends State<SignUpForm> {
                     icon: _isObscure
                         ? Icon(
                             Icons.visibility_off,
-                            color: kWhiteColor,
+                            color: Color(0xFF979797),
                           )
                         : Icon(
                             Icons.visibility,
-                            color: kWhiteColor,
+                            color: Color(0xFF979797),
                           ))
                 : null,
           ),

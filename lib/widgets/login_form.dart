@@ -138,7 +138,7 @@ class _LogInFormState extends State<LogInForm> {
                     color: kWhiteColor,
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10.0),
+                    borderRadius: BorderRadius.circular(12.0),
                     borderSide: BorderSide(color: kWhiteColor),
                   ),
                   suffixIcon: pass
@@ -151,11 +151,11 @@ class _LogInFormState extends State<LogInForm> {
                           icon: _isObscure
                               ? Icon(
                                   Icons.visibility_off,
-                                  color: kWhiteColor,
+                                  color: Color(0xFF979797),
                                 )
                               : Icon(
                                   Icons.visibility,
-                                  color: kWhiteColor,
+                                  color: Color(0xFF979797),
                                 ),
                         )
                       : null),

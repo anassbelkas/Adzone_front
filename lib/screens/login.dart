@@ -10,13 +10,18 @@ import 'package:adzone/widgets/primary_button.dart';
 import 'package:adzone/providers/authentication.dart';
 import 'package:adzone/widgets/alert/alert.dart';
 import 'package:material_dialogs/material_dialogs.dart';
+import 'package:animations/animations.dart';
 
 class LogInScreen extends StatelessWidget {
   final LoginController _loginController = LoginController();
   final AuthenticationApi _authenticationApi = AuthenticationApi();
+  final SharedAxisTransitionType _transitionType =
+      SharedAxisTransitionType.scaled;
+  //constructor
+  LogInScreen({Key key}) : super(key: key);
 
   bool _isDisabled = false;
-  PrimaryButton _primaryButton = PrimaryButton(
+  final PrimaryButton _primaryButton = PrimaryButton(
     buttonText: 'Sign in',
   );
 
@@ -28,7 +33,6 @@ class LogInScreen extends StatelessWidget {
       _isDisabled = true;
       _primaryButton.changeState('animate');
       var formData = _loginController.getFormData();
-      print(formData['email']);
       //delay 5 seconds
 
       _authenticationApi
@@ -56,123 +60,139 @@ class LogInScreen extends StatelessWidget {
     //run function after 5 seconds
     _primaryButton.onPressed = () => _login(context);
 
-    return Scaffold(
-      body: Padding(
-        padding: kDefaultPadding,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 60,
-              ),
-              Container(
-                  //center child
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Hello, again ',
-                        //center text
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 40,
-                          fontWeight: FontWeight.bold,
-                          color: kWhiteColor,
+    return PageTransitionSwitcher(
+      duration: const Duration(milliseconds: 300),
+      reverse: true,
+      transitionBuilder: (
+        Widget child,
+        Animation<double> animation,
+        Animation<double> secondaryAnimation,
+      ) {
+        return SharedAxisTransition(
+          child: child,
+          animation: animation,
+          secondaryAnimation: secondaryAnimation,
+          transitionType: _transitionType,
+        );
+      },
+      child: Scaffold(
+        body: Padding(
+          padding: kDefaultPadding,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 60,
+                ),
+                Container(
+                    //center child
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Hello, again ',
+                          //center text
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: kWhiteColor,
+                          ),
                         ),
-                      ),
-                      new RotationTransition(
-                        turns: AlwaysStoppedAnimation(15 / 360),
-                        child: Lottie.asset('animations/hand.json',
-                            height: 50, width: 50),
-                      )
-                    ],
-                  )),
-              SizedBox(
-                height: 60,
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              _logInForm,
-              SizedBox(
-                height: 20,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ResetPasswordScreen()));
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      'Forgot password?',
-                      style: TextStyle(
-                        color: kWhiteColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 1,
-                      ),
-                    ),
-                  )),
-
-              SizedBox(
-                height: 210,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 50),
-                child: _primaryButton,
-              ),
-
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Don’t have an account?',
-                    style: subTitle,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  GestureDetector(
+                        new RotationTransition(
+                          turns: AlwaysStoppedAnimation(15 / 360),
+                          child: Lottie.asset('animations/hand.json',
+                              height: 50, width: 50),
+                        )
+                      ],
+                    )),
+                SizedBox(
+                  height: 60,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                _logInForm,
+                SizedBox(
+                  height: 20,
+                ),
+                GestureDetector(
                     onTap: () {
                       Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignUpScreen(),
-                        ),
-                      );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ResetPasswordScreen()));
                     },
-                    child: Text(
-                      'Sign Up',
-                      style: textButton.copyWith(
-                        decoration: TextDecoration.underline,
-                        decorationThickness: 2,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        'Forgot password?',
+                        style: TextStyle(
+                          color: kWhiteColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 1,
+                        ),
+                      ),
+                    )),
+
+                SizedBox(
+                  height: 210,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  child: _primaryButton,
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Don’t have an account?',
+                      style: subTitle,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SignUpScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Sign Up',
+                        style: textButton.copyWith(
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 2,
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              // Text(
-              //   'Or log in with:',
-              //   style: subTitle.copyWith(color: kWhiteColor),
-              // ),
-              // SizedBox(
-              //   height: 20,
-              // ),
-              // LoginOption(),
-            ],
+                  ],
+                ),
+                // Text(
+                //   'Or log in with:',
+                //   style: subTitle.copyWith(color: kWhiteColor),
+                // ),
+                // SizedBox(
+                //   height: 20,
+                // ),
+                // LoginOption(),
+              ],
+            ),
           ),
         ),
+        backgroundColor: kPrimaryColor,
       ),
-      backgroundColor: kPrimaryColor,
     );
   }
 }
