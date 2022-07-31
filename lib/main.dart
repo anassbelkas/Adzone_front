@@ -1,4 +1,4 @@
-import 'package:adzone/screens/hello.dart';
+import 'package:adzone/screens/OTP.dart';
 import 'package:adzone/screens/login.dart';
 import 'package:adzone/screens/signup.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: 'DM Sans'),
-      home: SignUpScreen(),
+      home: Splash(),
     );
   }
 }

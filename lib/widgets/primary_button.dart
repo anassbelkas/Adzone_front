@@ -8,7 +8,7 @@ final EventEmitter emitter = new EventEmitter();
 class PrimaryButton extends StatefulWidget {
   String buttonText;
   Function onPressed;
-  PrimaryButton({@required this.buttonText});
+  PrimaryButton({@required this.buttonText, this.onPressed});
   _PrimaryButton __primaryButton = _PrimaryButton();
   @override
   State<StatefulWidget> createState() {

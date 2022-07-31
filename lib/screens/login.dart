@@ -38,7 +38,7 @@ class LogInScreen extends StatelessWidget {
       _authenticationApi
           .login(formData['email'], formData['password'])
           .then((value) {
-        if (value['success']) {
+        if (value.success) {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -48,7 +48,7 @@ class LogInScreen extends StatelessWidget {
         } else {
           _isDisabled = false;
           _primaryButton.changeState('idle');
-          _loginController.setError(value['msg']);
+          _loginController.setError(value.message);
         }
       });
     }
