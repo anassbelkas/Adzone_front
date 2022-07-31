@@ -1,4 +1,3 @@
-import 'package:adzone/screens/OTP.dart';
 import 'package:adzone/screens/login.dart';
 import 'package:adzone/screens/signup.dart';
 import 'package:adzone/widgets/navbar.dart';

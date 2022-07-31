@@ -4,6 +4,7 @@ import 'package:adzone/screens/details/components/top_rounded_container.dart';
 import 'package:adzone/screens/home/home_screen.dart';
 import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
+import 'package:adzone/widgets/navbar.dart';
 import 'package:flutter/material.dart';
 
 import 'product_image.dart';
@@ -33,7 +34,7 @@ class Body extends StatelessWidget {
             padding: EdgeInsets.only(left: SizeConfig.screenWidth * 0.15, right: SizeConfig.screenWidth * 0.15, top: getProportionateScreenWidth(15), bottom: getProportionateScreenWidth(40),),
             child: ElevatedButton(
               onPressed: (){
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomeScreen(),),);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => Navbar(),),);
               },
               style: ButtonStyle(
                 foregroundColor: MaterialStateProperty.all<Color>(kWhiteColor),
