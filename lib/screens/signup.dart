@@ -30,7 +30,7 @@ class SignUpScreen extends StatelessWidget {
             .signup(formData['firstName'], formData['lastName'],
                 formData['email'], formData['password'])
             .then((value) {
-          if (value['success']) {
+          if (value.success) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -39,7 +39,7 @@ class SignUpScreen extends StatelessWidget {
             );
           } else {
             _primaryButton.changeState('idle');
-            _signUpController.setError(value['msg']);
+            _signUpController.setError(value.message);
           }
         });
       }

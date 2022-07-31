@@ -2,29 +2,34 @@ import 'package:dio/dio.dart';
 import 'package:adzone/models/user.dart';
 import 'package:adzone/utils/constants.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:adzone/models/response.dart';
 
 class AuthenticationApi {
   final Dio _dio = new Dio();
   final storage = new FlutterSecureStorage();
 
-  Future<Map<String, dynamic>> login(String email, String password) async {
+  Future<ResponseModel> login(String email, String password) async {
     try {
       final response = await _dio.post(SERVER_URL + '/auth/signin',
           data: {"email": email, "password": password});
       if (response.statusCode == 200) {
         final token = response.data['token'];
         storage.write(key: 'token', value: token);
-        return response.data;
+        //plug response data into a Response object
+        final responseData = ResponseModel.fromJson(response.data);
+        return responseData;
       } else {
-        return response.data;
+        final responseData = ResponseModel.fromJson(response.data);
+        return responseData;
       }
     } catch (e) {
       // print(e);
-      return e.response.data;
+      final responseData = ResponseModel.fromJson(e.response.data);
+      return responseData;
     }
   }
 
-  Future<Map<String, dynamic>> signup(String first_name, String last_name,
+  Future<ResponseModel> signup(String first_name, String last_name,
       String email, String password) async {
     try {
       final response = await _dio.post(SERVER_URL + '/auth/signup', data: {
@@ -33,10 +38,11 @@ class AuthenticationApi {
         "email": email,
         "password": password
       });
-
-      return response.data;
+      final responseData = ResponseModel.fromJson(response.data);
+      return responseData;
     } catch (e) {
-      return e.response.data;
+      final responseData = ResponseModel.fromJson(e.response.data);
+      return responseData;
     }
   }
 
@@ -77,18 +83,15 @@ class AuthenticationApi {
     }
   }
 
-  Future<String> verifyAccount(String code) async {
+  Future<ResponseModel> verifyAccount(String code) async {
     try {
       final response = await _dio.get(SERVER_URL + '/auth/verify/' + code);
 
-      if (response.statusCode == 200) {
-        return response.data['msg'];
-      } else {
-        throw Exception(response.data['msg']);
-      }
+      final responseData = ResponseModel.fromJson(response.data);
+      return responseData;
     } catch (e) {
-      print(e);
-      return e.toString();
+      final responseData = ResponseModel.fromJson(e.response.data);
+      return responseData;
     }
   }
 
@@ -104,6 +107,19 @@ class AuthenticationApi {
     } catch (e) {
       print(e);
       return false;
+    }
+  }
+
+  //resend verification code
+  Future<ResponseModel> resendVerificationCode(String email) async {
+    try {
+      final response = await _dio.post(SERVER_URL + '/auth/resend-verification',
+          data: {"email": email});
+      final responseData = ResponseModel.fromJson(response.data);
+      return responseData;
+    } catch (e) {
+      final responseData = ResponseModel.fromJson(e.response.data);
+      return responseData;
     }
   }
 }
