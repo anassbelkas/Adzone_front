@@ -6,14 +6,12 @@ class Product {
   final List<String> images;
   final List<Color> colors;
   final int price;
-  final double rating;
   final bool isFavourite, isPopular;
 
   Product({
     @required this.id,
     @required this.images,
     @required this.colors,
-    this.rating = 0.0,
     this.isFavourite = false,
     this.isPopular = false,
     @required this.title,
@@ -29,9 +27,6 @@ List<Product> demoProducts = [
     id: 1,
     images: [
       "images/019.png",
-      "images/_home.png",
-      "images/istore.png",
-      "images/kfc.png",
     ],
     colors: [
       Color(0xFFF6625E),
@@ -42,7 +37,6 @@ List<Product> demoProducts = [
     title: "300DH GiftCard",
     price: 400,
     description: description,
-    rating: 4.8,
     isFavourite: true,
     isPopular: true,
   ),
@@ -58,9 +52,8 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Nike Sport White - Man Pant",
-    price: 50,
+    price: 500,
     description: description,
-    rating: 4.1,
     isPopular: true,
   ),
   Product(
@@ -75,9 +68,8 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Gloves XC Omega - Polygon",
-    price: 36,
+    price: 1000,
     description: description,
-    rating: 4.1,
     isFavourite: true,
     isPopular: true,
   ),
@@ -93,10 +85,10 @@ List<Product> demoProducts = [
       Colors.white,
     ],
     title: "Logitech Head",
-    price: 20,
+    price: 600,
     description: description,
-    rating: 4.1,
     isFavourite: true,
+    isPopular: true,
   ),
 ];
 

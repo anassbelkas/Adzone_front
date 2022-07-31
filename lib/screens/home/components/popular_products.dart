@@ -1,4 +1,5 @@
 import 'package:adzone/models/product.dart';
+import 'package:adzone/screens/details/details_screen.dart';
 import 'package:adzone/screens/home/components/product_card.dart';
 import 'package:adzone/screens/home/components/section_title.dart';
 import 'package:adzone/size_config.dart';
@@ -21,9 +22,16 @@ class PopularProducts extends StatelessWidget {
             children: [
               ...List.generate(
                 demoProducts.length, 
-                (index) => ProductCard(
-                  product: demoProducts[index],
-                ),
+                (index) {
+                  if (demoProducts[index].isPopular)
+                    return ProductCard(
+                      product: demoProducts[index],
+                      press: () => {Navigator.pushNamed(context, DetailsScreen.routeName, arguments: ProductDetailsArguments(product: demoProducts[index]),)},
+                    );
+                  
+                  return SizedBox
+                      .shrink();  //by default width and height = 0
+                },
               ),
               SizedBox(height: getProportionateScreenWidth(20),),
             ],
