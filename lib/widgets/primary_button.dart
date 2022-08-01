@@ -8,7 +8,9 @@ final EventEmitter emitter = new EventEmitter();
 class PrimaryButton extends StatefulWidget {
   String buttonText;
   Function onPressed;
-  PrimaryButton({@required this.buttonText, this.onPressed});
+  bool inverse;
+  PrimaryButton(
+      {@required this.buttonText, this.onPressed, this.inverse = false});
   _PrimaryButton __primaryButton = _PrimaryButton();
   @override
   State<StatefulWidget> createState() {
@@ -24,12 +26,17 @@ class PrimaryButton extends StatefulWidget {
 class _PrimaryButton extends State<PrimaryButton> {
   String buttonText;
   bool isAnimated = false;
-  // _PrimaryButton({@required this.buttonText});
+  bool inverse;
+
+  @override
+  void initState() {
+    super.initState();
+    buttonText = widget.buttonText;
+    inverse = widget.inverse;
+  }
 
   @override
   Widget build(BuildContext context) {
-    buttonText = widget.buttonText;
-    // buttonText = 'Log In';
     emitter.on('changeState', null, (ev, ctx) {
       if (ev.eventData == 'animate') {
         setState(() {
@@ -51,12 +58,13 @@ class _PrimaryButton extends State<PrimaryButton> {
         widget.onPressed();
       },
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Colors.transparent),
+        backgroundColor: MaterialStateProperty.all(
+            inverse ? kPrimaryColor : Colors.transparent),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: BorderSide(
-              color: kWhiteColor,
+              color: inverse ? kPrimaryColor : kWhiteColor,
               width: 1,
             ),
           ),

@@ -1,3 +1,5 @@
+import 'package:adzone/providers/authentication.dart';
+import 'package:adzone/screens/success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/screens/login.dart';
 import 'package:adzone/theme.dart';
@@ -6,24 +8,55 @@ import 'package:adzone/widgets/reset_form.dart';
 import 'package:adzone/widgets/return_arrow.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
+  final ResetController controller = ResetController();
+
   @override
   Widget build(BuildContext context) {
+    final ResetForm _resetForm = ResetForm(controller: controller);
+    final AuthenticationApi _authenticationApi = AuthenticationApi();
+    final PrimaryButton _primaryButton =
+        PrimaryButton(buttonText: 'Reset Password');
+    _primaryButton.onPressed = () {
+      if (controller.validate()) {
+        _authenticationApi
+            .resetPassword(controller.getEmail())
+            .then((value) => {
+                  if (value.success)
+                    {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SuccessScreen(
+                                    text:
+                                        'Your password has been reset successfully. Please check your email for the new password.',
+                                    onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                LogInScreen())),
+                                  )))
+                    }
+                });
+      }
+    };
     return Scaffold(
-      body: Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ReturnArrow(),
           Padding(
             padding: kDefaultPadding,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 //return arrow back
-                ReturnArrow(),
+                // ReturnArrow(),
                 SizedBox(
-                  height: 250,
+                  height: 50,
                 ),
                 Text(
                   'Reset Password',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
@@ -35,24 +68,19 @@ class ResetPasswordScreen extends StatelessWidget {
                 ),
                 Text(
                   'Please enter your email address',
-                  style: subTitle.copyWith(fontWeight: FontWeight.w600),
+                  style: subTitle.copyWith(fontWeight: FontWeight.w400),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 50,
                 ),
-                ResetForm(),
+                _resetForm,
                 SizedBox(
-                  height: 20,
+                  height: 350,
                 ),
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LogInScreen(),
-                          ));
-                    },
-                    child: PrimaryButton(buttonText: 'Reset Password')),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  child: _primaryButton,
+                )
               ],
             ),
           )

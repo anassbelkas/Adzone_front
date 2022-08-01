@@ -1,14 +1,11 @@
-import 'package:adzone/widgets/alert/alert_animations.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/screens/reset_password.dart';
 import 'package:adzone/screens/signup.dart';
 import 'package:adzone/theme.dart';
 import 'package:adzone/widgets/login_form.dart';
-import 'package:adzone/widgets/login_option.dart';
 import 'package:adzone/widgets/navbar.dart';
 import 'package:adzone/widgets/primary_button.dart';
 import 'package:adzone/providers/authentication.dart';
-import 'package:adzone/widgets/alert/alert.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:animations/animations.dart';
 

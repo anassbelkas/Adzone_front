@@ -122,4 +122,17 @@ class AuthenticationApi {
       return responseData;
     }
   }
+
+  //reset password
+  Future<ResponseModel> resetPassword(String email) async {
+    try {
+      final response = await _dio
+          .post(SERVER_URL + '/auth/forgot-password', data: {"email": email});
+      final responseData = ResponseModel.fromJson(response.data);
+      return responseData;
+    } catch (e) {
+      final responseData = ResponseModel.fromJson(e.response.data);
+      return responseData;
+    }
+  }
 }
