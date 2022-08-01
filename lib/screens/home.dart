@@ -31,7 +31,6 @@ import 'package:adzone/screens/map.dart';
 //   }
 // }
 
-
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();

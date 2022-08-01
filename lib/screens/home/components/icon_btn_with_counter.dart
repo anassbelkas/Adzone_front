@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 class IconBtnWithCounter extends StatelessWidget {
   const IconBtnWithCounter({
-    Key key, this.numOfItems = 0,@required this.press,
+    Key key,
+    this.numOfItems = 0,
+    @required this.press,
   }) : super(key: key);
 
   final int numOfItems;
@@ -19,16 +21,15 @@ class IconBtnWithCounter extends StatelessWidget {
         overflow: Overflow.visible,
         children: [
           Container(
-            padding: EdgeInsets.all(getProportionateScreenWidth(12)),
-            height: getProportionateScreenWidth(46),
-            width: getProportionateScreenWidth(46),
-            decoration: BoxDecoration(
-              color: kPrimaryColor.withOpacity(0.1),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(Icons.notifications)
-          ),
-          if(numOfItems != 0)
+              padding: EdgeInsets.all(getProportionateScreenWidth(12)),
+              height: getProportionateScreenWidth(46),
+              width: getProportionateScreenWidth(46),
+              decoration: BoxDecoration(
+                color: kPrimaryColor.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(Icons.notifications)),
+          if (numOfItems != 0)
             Positioned(
               top: -3,
               right: 0,
@@ -48,8 +49,8 @@ class IconBtnWithCounter extends StatelessWidget {
                       height: 1,
                       color: kWhiteColor,
                       fontWeight: FontWeight.w600,
-                      ),
                     ),
+                  ),
                 ),
               ),
             )
