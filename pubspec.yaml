@@ -39,6 +39,7 @@ dependencies:
   flutter_screenutil: ^5.5.3+2
   animations: ^2.0.2
   google_maps_flutter: ^2.1.10
+  animated_background: ^2.0.0
 
 dev_dependencies:
   flutter_test:

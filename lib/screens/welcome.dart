@@ -1,91 +1,112 @@
 import 'package:adzone/screens/login.dart';
 import 'package:adzone/screens/signup.dart';
 import 'package:adzone/theme.dart';
+import 'package:adzone/widgets/primary_button.dart';
+import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
 
 class Welcome extends StatefulWidget {
-  const Welcome({ Key key }) : super(key: key);
+  const Welcome({Key key}) : super(key: key);
 
   @override
   State<Welcome> createState() => _WelcomeState();
 }
 
-class _WelcomeState extends State<Welcome> {
+class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    PrimaryButton _signUpButton = PrimaryButton(
+      buttonText: 'Create an account',
+      borderColor: kPrimaryColor,
+    );
+    PrimaryButton _signInButton = PrimaryButton(
+      buttonText: 'Sign in',
+      inverse: true,
+    );
+    _signUpButton.onPressed = () {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => SignUpScreen(),
+        ),
+      );
+    };
+    _signInButton.onPressed = () {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => LogInScreen(),
+        ),
+      );
+    };
+    var particlePaint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 0.7;
+    ParticleOptions particleOptions = const ParticleOptions(
+      baseColor: Colors.red,
+      spawnOpacity: 0.0,
+      opacityChangeRate: 0.25,
+      minOpacity: 0.1,
+      maxOpacity: 0.4,
+      spawnMinSpeed: 30.0,
+      spawnMaxSpeed: 50.0,
+      spawnMinRadius: 7.0,
+      spawnMaxRadius: 15.0,
+      particleCount: 40,
+    );
     return Scaffold(
+      backgroundColor: kadzone,
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xfff7f6fb),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-          child: Column(
-            children: [
-              // Image.asset('images/AD.png', width: 250,),
-              // SizedBox(height: 18,),
-              SizedBox(
-                height: 18,
-              ),
-              Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  color: Colors.deepPurple.shade50,
-                  shape: BoxShape.circle,
+      body: AnimatedBackground(
+        behaviour: RandomParticleBehaviour(
+            paint: particlePaint, options: particleOptions),
+        vsync: this,
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+            child: Column(
+              children: [
+                // Image.asset('images/AD.png', width: 250,),
+                // SizedBox(height: 18,),
+                SizedBox(
+                  height: 50,
                 ),
-                child: Image.asset(
-                  'images/A(2).png',
-                ),
-              ),
-              SizedBox(
-                height: 24,
-              ),
-              Text("Let's get started", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-              SizedBox(height: 10,),
-              Text("Never a better time than now to start.  ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold, color: Colors.black38),),
-              SizedBox(height: 38,),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => SignUpScreen(),),);
-                  },
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(kWhiteColor),
-                    backgroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)))
+
+                Text(
+                  "Scan, Watch and EARN",
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(14),
-                    child: Text(
-                      'Create Account',
-                      style: TextStyle(fontSize: 16),
-                    )
-                    ),
                 ),
-              ),
-              SizedBox(height: 22,),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => LogInScreen(),),);
-                  },
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(kPrimaryColor),
-                    backgroundColor: MaterialStateProperty.all<Color>(kWhiteColor),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)))
+                SizedBox(
+                  height: 24,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.4,
+                  child: Image.asset(
+                    'images/AD.png',
                   ),
-                  child: Padding(
-                    padding: EdgeInsets.all(14),
-                    child: Text(
-                      'Login',
-                      style: TextStyle(fontSize: 16),
-                    )
-                    ),
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 10,
+                ),
+
+                SizedBox(
+                  height: 150,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: _signInButton,
+                ),
+                SizedBox(
+                  height: 22,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: _signUpButton,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -9,8 +9,12 @@ class PrimaryButton extends StatefulWidget {
   String buttonText;
   Function onPressed;
   bool inverse;
+  Color borderColor;
   PrimaryButton(
-      {@required this.buttonText, this.onPressed, this.inverse = false});
+      {@required this.buttonText,
+      this.onPressed,
+      this.inverse = false,
+      this.borderColor = kWhiteColor});
   _PrimaryButton __primaryButton = _PrimaryButton();
   @override
   State<StatefulWidget> createState() {
@@ -27,12 +31,14 @@ class _PrimaryButton extends State<PrimaryButton> {
   String buttonText;
   bool isAnimated = false;
   bool inverse;
+  Color borderColor;
 
   @override
   void initState() {
     super.initState();
     buttonText = widget.buttonText;
     inverse = widget.inverse;
+    borderColor = widget.borderColor;
   }
 
   @override
@@ -64,7 +70,7 @@ class _PrimaryButton extends State<PrimaryButton> {
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
             side: BorderSide(
-              color: inverse ? kPrimaryColor : kWhiteColor,
+              color: inverse ? kPrimaryColor : borderColor,
               width: 1,
             ),
           ),
@@ -77,12 +83,12 @@ class _PrimaryButton extends State<PrimaryButton> {
         width: double.infinity,
         child: isAnimated
             ? SpinKitCircle(
-                color: kWhiteColor,
+                color: borderColor,
                 size: 30,
               )
             : Text(
                 buttonText,
-                style: textButton.copyWith(color: kWhiteColor),
+                style: textButton.copyWith(color: borderColor),
               ),
       ),
     );
