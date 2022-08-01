@@ -7,10 +7,12 @@ const kDarkGreyColor = Color(0xFFA8A8A8);
 const kWhiteColor = Color.fromARGB(255, 255, 255, 255);
 const kZambeziColor = Color(0xFF5B5B5B);
 const kBlackColor = Color(0xFF272726);
+const kLightGreyColor = Color(0xFF9B9B9B);
+const kGreyColor = Color(0xFF8C8C8C);
 const kTextFieldColor = Color.fromARGB(255, 200, 200, 200);
-const kadzone = Color.fromARGB(255, 255, 214, 194);
-const kadzone2 =Color.fromARGB(255, 255, 198, 170);
-const kadzone3 =Color.fromARGB(255, 255, 182, 145);
+const kadzone = Color(0xFFFAF7F2);
+const kadzone2 = Color.fromARGB(255, 255, 198, 170);
+const kadzone3 = Color.fromARGB(255, 255, 182, 145);
 
 const kDefaultPadding = EdgeInsets.symmetric(horizontal: 30);
 

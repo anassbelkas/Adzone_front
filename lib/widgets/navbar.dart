@@ -1,11 +1,12 @@
 import 'package:adzone/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
-
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:adzone/screens/cam.dart';
 import 'package:adzone/screens/home.dart';
 import 'package:adzone/screens/profil.dart';
 import 'package:adzone/screens/map.dart';
+import 'package:iconsax/iconsax.dart';
 
 class Navbar extends StatefulWidget {
   @override
@@ -13,7 +14,7 @@ class Navbar extends StatefulWidget {
 }
 
 class _NavbarState extends State<Navbar> {
-  int index = 0;
+  int _selectedIndex = 0;
 
   final screens = [
     HomeScreen(),
@@ -25,42 +26,70 @@ class _NavbarState extends State<Navbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screens[index],
-      bottomNavigationBar: NavigationBarTheme(
-        data: NavigationBarThemeData(
-            indicatorColor: kPrimaryColor,
-            labelTextStyle: MaterialStateProperty.all(TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-            ))),
-        child: NavigationBar(
-          height: 60,
-          backgroundColor: kWhiteColor,
-          labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
-          animationDuration: Duration(seconds: 2),
-          selectedIndex: index,
-          onDestinationSelected: (index) => setState(() => this.index = index),
-          destinations: [
-            NavigationDestination(
-                icon: Icon(Icons.home),
-                selectedIcon: Icon(Icons.home),
-                label: 'Home'),
-            NavigationDestination(
-                icon: Icon(Icons.map_outlined),
-                selectedIcon: Icon(Icons.map),
-                label: 'Map'),
-            NavigationDestination(
-                icon: Icon(Icons.camera_alt_outlined),
-                selectedIcon: Icon(Icons.camera_alt),
-                label: 'Camera'),
-            NavigationDestination(
-                icon: Icon(Icons.portrait_outlined),
-                selectedIcon: Icon(Icons.portrait),
-                label: 'Profil'),
-          ],
-        ),
-      ),
-    );
+        body: screens[_selectedIndex],
+        bottomNavigationBar: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  blurRadius: 20,
+                  color: Colors.black.withOpacity(.1),
+                )
+              ],
+            ),
+            child: SafeArea(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: GNav(
+                  rippleColor: Colors.grey[300],
+                  hoverColor: Colors.grey[100],
+                  gap: 8,
+                  activeColor: Colors.black,
+                  iconSize: 24,
+                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                  duration: Duration(milliseconds: 400),
+                  tabBackgroundColor: kadzone,
+                  color: Colors.black,
+                  tabs: [
+                    GButton(
+                      icon: Iconsax.home,
+                      iconActiveColor: kPrimaryColor,
+                      iconColor: kGreyColor,
+                      textColor: kPrimaryColor,
+                      text: 'Home',
+                    ),
+                    GButton(
+                      icon: Iconsax.map,
+                      iconActiveColor: kPrimaryColor,
+                      iconColor: kGreyColor,
+                      textColor: kPrimaryColor,
+                      text: 'Map',
+                    ),
+                    GButton(
+                      icon: Iconsax.camera,
+                      iconActiveColor: kPrimaryColor,
+                      iconColor: kGreyColor,
+                      textColor: kPrimaryColor,
+                      text: 'Camera',
+                    ),
+                    GButton(
+                      icon: Iconsax.user,
+                      iconActiveColor: kPrimaryColor,
+                      iconColor: kGreyColor,
+                      textColor: kPrimaryColor,
+                      text: 'Profile',
+                    ),
+                  ],
+                  selectedIndex: _selectedIndex,
+                  onTabChange: (index) {
+                    setState(() {
+                      _selectedIndex = index;
+                    });
+                  },
+                ),
+              ),
+            )));
   }
 }
 
