@@ -161,6 +161,9 @@ class _RewardsState extends State<Rewards> {
                     }),
               ),
             ),
+            SizedBox(
+              height: 5,
+            ),
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,

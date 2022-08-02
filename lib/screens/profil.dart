@@ -1,6 +1,7 @@
 import 'package:adzone/screens/Settings.dart';
 import 'package:adzone/screens/home.dart';
 import 'package:adzone/screens/rewards.dart';
+import 'package:adzone/screens/achievements.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
 
@@ -46,6 +47,7 @@ class Profil extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(left: 16, top: 25, right: 16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
                     child: Stack(
@@ -182,7 +184,13 @@ class Profil extends StatelessWidget {
                             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             primary: Colors.black,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Achievements()),
+                            );
+                          },
                           child: Icon(IconData(0xe09c,
                               fontFamily: 'MaterialIcons',
                               matchTextDirection: true)))
@@ -252,6 +260,7 @@ class Profil extends StatelessWidget {
                       padding: const EdgeInsets.all(12)),
                   SizedBox(height: 15),
                   Container(
+                    width: double.infinity,
                     decoration: BoxDecoration(
                         border: Border.all(color: Color(0xFFFA7850), width: 2),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
