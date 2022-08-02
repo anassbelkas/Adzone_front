@@ -1,4 +1,5 @@
 import 'package:adzone/screens/home/components/categories.dart';
+import 'package:adzone/screens/home/components/news.dart';
 import 'package:adzone/screens/home/components/popular_products.dart';
 import 'package:adzone/screens/home/components/popular_rewards.dart';
 import 'package:adzone/screens/home/components/surprise_banner.dart';
@@ -24,6 +25,8 @@ class Body extends StatelessWidget {
             // PopularRewards(),
             SizedBox(height: getProportionateScreenWidth(30),),
             PopularProducts(),
+            SizedBox(height: getProportionateScreenWidth(30),),
+            News(),
             SizedBox(height: getProportionateScreenWidth(30),),
           ],
         ),
