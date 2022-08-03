@@ -1,4 +1,4 @@
-import 'package:adzone/models/product.dart';
+import 'package:adzone/models/news.dart';
 import 'package:adzone/screens/home/components/news_card.dart';
 import 'package:adzone/screens/home/components/section_title.dart';
 import 'package:adzone/screens/the_news/news_screen.dart';
@@ -17,14 +17,14 @@ class News extends StatelessWidget {
         SectionTitle(text: "News", press: () {}),
         SizedBox(height: getProportionateScreenWidth(20),),
               ...List.generate(
-                demoProducts.length, 
+                demoNews.length, 
                 (index) {
                    return NewsCard(
-                    title: demoProducts[index].title,
-                    text: demoProducts[index].description,
-                    icon: demoProducts[index].images[0],
-                    // press: () => {Navigator.pushNamed(context, DetailsScreen.routeName, arguments: ProductDetailsArguments(product: demoProducts[index]),)},
-                    press: () => {Navigator.push(context, MaterialPageRoute( builder: (context) => NewsScreen()))}
+                    title: demoNews[index].title,
+                    text: demoNews[index].description,
+                    icon: demoNews[index].images[0],
+                    press: () => {Navigator.pushNamed(context, NewsScreen.routeName, arguments: NewsArguments(news: demoNews[index]),)},
+                    // press: () => {Navigator.push(context, MaterialPageRoute( builder: (context) => NewsScreen()))}
                     );
                 },
               ),

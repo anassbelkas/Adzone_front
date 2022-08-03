@@ -64,6 +64,7 @@ class _SttingsState extends State<Settings> {
                       Icon(
                         Icons.location_on,
                         color: kPrimaryColor,
+                        size: 30,
                       ),
                       SizedBox(width: 20),
                       Expanded(child: Column(
@@ -88,6 +89,7 @@ class _SttingsState extends State<Settings> {
                           Icon(
                             Icons.auto_awesome_mosaic,
                             color: kPrimaryColor,
+                            size: 30,
                           ),
                           SizedBox(width: 20),
                           Expanded(child: Column(
@@ -95,7 +97,7 @@ class _SttingsState extends State<Settings> {
                               Text("Support Center", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),),
                             ],
                           )),
-                          Icon(Icons.arrow_forward_ios, color: kPrimaryColor,),
+                          Icon(Icons.arrow_forward_ios, color: kPrimaryColor),
                         ],
                       ),
                     ),
@@ -112,6 +114,7 @@ class _SttingsState extends State<Settings> {
                           Icon(
                             Icons.security,
                             color: kPrimaryColor,
+                            size: 30,
                           ),
                           SizedBox(width: 20),
                           Expanded(child: Column(
@@ -136,6 +139,7 @@ class _SttingsState extends State<Settings> {
                           Icon(
                             Icons.language,
                             color: kPrimaryColor,
+                            size: 30,
                           ),
                           SizedBox(width: 20),
                           Expanded(child: Column(
@@ -160,6 +164,7 @@ class _SttingsState extends State<Settings> {
                           Icon(
                             Icons.notifications,
                             color: kPrimaryColor,
+                            size: 30,
                           ),
                           SizedBox(width: 20),
                           Expanded(child: Column(

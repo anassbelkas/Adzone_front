@@ -16,7 +16,7 @@ class ProductImage extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: getProportionateScreenWidth(300),
+          width: getProportionateScreenWidth(280),
           child: AspectRatio(aspectRatio: 1, child: Image.asset(product.images[selectedimage]),),
         ),
         Row()

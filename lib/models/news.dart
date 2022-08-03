@@ -1,68 +1,44 @@
 import 'package:flutter/material.dart';
 
-class Product {
+class News {
   final int id;
   final String title, description;
   final List<String> images;
-  final int price;
-  final bool isFavourite, isPopular;
 
-  Product({
+  News({
     @required this.id,
     @required this.images,
-    this.isFavourite = false,
-    this.isPopular = false,
     @required this.title,
-    @required this.price,
     @required this.description,
   });
 }
 
-// Our demo Products
+// Our demo 
 
-List<Product> demoProducts = [
-  Product(
+List<News> demoNews = [
+  News(
     id: 1,
-    images: [
-      "images/019.png",
-    ],
-    title: "300DH GiftCard",
-    price: 400,
-    description: description,
-    isFavourite: true,
-    isPopular: true,
-  ),
-  Product(
-    id: 2,
-    images: [
-      "images/kfc.png",
-    ],
-    title: "Nike Sport White - Man Pant",
-    price: 500,
-    description: description,
-    isPopular: true,
-  ),
-  Product(
-    id: 3,
-    images: [
-      "images/istore.png",
-    ],
-    title: "Gloves XC Omega - Polygon",
-    price: 1000,
-    description: description,
-    isFavourite: true,
-    isPopular: true,
-  ),
-  Product(
-    id: 4,
     images: [
       "images/woolworths.png",
     ],
-    title: "Logitech Head",
-    price: 600,
+    title: "McDonald’s officially added to AdZone",
     description: description,
-    isFavourite: true,
-    isPopular: true,
+  ),
+  News(
+    id: 2,
+    images: [
+      "images/istore.png",
+    ],
+    title: "Patch notes for update ver. 0.0.1",
+    description: description,
+  ),
+  News(
+    id: 3,
+    images: [
+      "images/kfc.png",
+    ],
+    title: "KFC's officially added to AdZone",
+    description: description,
   ),
 ];
 
