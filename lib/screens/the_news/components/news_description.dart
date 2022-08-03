@@ -26,7 +26,7 @@ class NewsDescription extends StatelessWidget {
           padding: EdgeInsets.only(
             left: getProportionateScreenWidth(20),
             right: getProportionateScreenWidth(64),
-            bottom: getProportionateScreenWidth(200)
+            bottom: getProportionateScreenWidth(50)
           ),
           child: Text(
             news.description,
