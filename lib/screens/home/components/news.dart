@@ -23,8 +23,8 @@ class News extends StatelessWidget {
                     title: demoProducts[index].title,
                     text: demoProducts[index].description,
                     icon: demoProducts[index].images[0],
-                    // press: () => {Navigator.pushNamed(context, DetailsScreen.routeName, arguments: ProductDetailsArguments(product: demoProducts[index]),)},
-                    press: () => {Navigator.push(context, MaterialPageRoute( builder: (context) => NewsScreen()))}
+                    press: () => {Navigator.pushNamed(context, NewsScreen.routeName, arguments: NewsArguments(product: demoProducts[index]),)},
+                    // press: () => {Navigator.push(context, MaterialPageRoute( builder: (context) => NewsScreen()))}
                     );
                 },
               ),
