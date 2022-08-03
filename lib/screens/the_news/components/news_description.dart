@@ -1,4 +1,4 @@
-import 'package:adzone/models/product.dart';
+import 'package:adzone/models/news.dart';
 import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +6,10 @@ import 'package:flutter/material.dart';
 class NewsDescription extends StatelessWidget {
   const NewsDescription({
     Key key,
-    @required this.product,
+    @required this.news,
   }) : super(key: key);
 
-  final Product product;
+  final News news;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class NewsDescription extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20),vertical: getProportionateScreenWidth(10)),
-          child: Text(product.title, style: Theme.of(context).textTheme.headline6, maxLines: 2,), 
+          child: Text(news.title, style: Theme.of(context).textTheme.headline6, maxLines: 2,), 
         ),
         const SizedBox(height: 5,),
         
@@ -29,7 +29,7 @@ class NewsDescription extends StatelessWidget {
             bottom: getProportionateScreenWidth(200)
           ),
           child: Text(
-            product.description,
+            news.description,
           ),
         ),
       ],

@@ -22,14 +22,14 @@ class NewsCard extends StatelessWidget {
                 children: [
                   Image.asset(
                     icon,
-                    width: 50,
+                    width: 100,
                   ),
                   SizedBox(width: 20),
                   Expanded(child: Column(
                     children: [
                       Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
                       SizedBox(height: 5,),
-                      Text(text, style: TextStyle(fontSize: 12)),
+                      Text(text, style: TextStyle(fontSize: 12), maxLines: 3,),
                     ],
                   )),
                   Icon(Icons.arrow_forward_ios),

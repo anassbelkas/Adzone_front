@@ -1,4 +1,4 @@
-import 'package:adzone/models/product.dart';
+import 'package:adzone/models/news.dart';
 import 'package:adzone/screens/the_news/components/body.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
@@ -11,14 +11,14 @@ class NewsScreen extends StatelessWidget {
     final NewsArguments arguments = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       backgroundColor: kWhiteColor,
-      body: Body(product: arguments.product,),
+      body: Body(news: arguments.news,),
     );
   }
 }
 
 class NewsArguments {
-  final Product product;
+  final News news;
 
-  NewsArguments({@required this.product});
+  NewsArguments({@required this.news});
   
 }

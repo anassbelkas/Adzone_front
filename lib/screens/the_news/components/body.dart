@@ -1,13 +1,13 @@
-import 'package:adzone/models/product.dart';
+import 'package:adzone/models/news.dart';
 import 'package:adzone/screens/the_news/components/news_description.dart';
 import 'package:adzone/screens/the_news/components/news_image.dart';
 import 'package:adzone/widgets/top_rounded_container.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatelessWidget {
-  const Body({ Key key,@required this.product }) : super(key: key);
+  const Body({ Key key,@required this.news }) : super(key: key);
 
-  final Product product;
+  final News news;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +39,11 @@ class Body extends StatelessWidget {
                 ],
               ),
             ),
-        NewsImage(product: product),
+        NewsImage(news: news),
         TopRoundedContainer(
           color: Color.fromARGB(255, 255, 251, 250),
           child: NewsDescription(
-            product: product,
+            news: news,
           ),
         ),
       ],
