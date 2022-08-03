@@ -22,12 +22,13 @@ class NewsCard extends StatelessWidget {
                 children: [
                   Image.asset(
                     icon,
-                    width: 22,
+                    width: 50,
                   ),
                   SizedBox(width: 20),
                   Expanded(child: Column(
                     children: [
                       Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
+                      SizedBox(height: 5,),
                       Text(text, style: TextStyle(fontSize: 12)),
                     ],
                   )),
