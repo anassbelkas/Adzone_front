@@ -10,11 +10,15 @@ class PrimaryButton extends StatefulWidget {
   Function onPressed;
   bool inverse;
   Color borderColor;
+  double width;
+  double height;
   PrimaryButton(
       {@required this.buttonText,
       this.onPressed,
       this.inverse = false,
-      this.borderColor = kWhiteColor});
+      this.borderColor = kWhiteColor,
+      this.width = double.infinity,
+      this.height = 50});
   _PrimaryButton __primaryButton = _PrimaryButton();
   @override
   State<StatefulWidget> createState() {
@@ -32,6 +36,8 @@ class _PrimaryButton extends State<PrimaryButton> {
   bool isAnimated = false;
   bool inverse;
   Color borderColor;
+  double width;
+  double height;
 
   @override
   void initState() {
@@ -39,6 +45,8 @@ class _PrimaryButton extends State<PrimaryButton> {
     buttonText = widget.buttonText;
     inverse = widget.inverse;
     borderColor = widget.borderColor;
+    width = widget.width;
+    height = widget.height;
   }
 
   @override
@@ -56,40 +64,47 @@ class _PrimaryButton extends State<PrimaryButton> {
         });
       }
     });
-    return ElevatedButton(
-      onPressed: () {
-        if (isAnimated) {
-          return;
-        }
-        widget.onPressed();
-      },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(
-            inverse ? kPrimaryColor : Colors.transparent),
-        shape: MaterialStateProperty.all(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-            side: BorderSide(
-              color: inverse ? kPrimaryColor : borderColor,
-              width: 1,
+    return Container(
+      width: width,
+      height: height,
+      child: ElevatedButton(
+        onPressed: () {
+          if (isAnimated) {
+            return;
+          }
+          widget.onPressed();
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(
+              inverse ? kPrimaryColor : Colors.transparent),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+              side: BorderSide(
+                color: inverse ? kPrimaryColor : borderColor,
+                width: 1,
+              ),
             ),
           ),
+          shadowColor: MaterialStateProperty.all(Colors.transparent),
+          foregroundColor: MaterialStateProperty.all(Colors.transparent),
+          overlayColor: MaterialStateProperty.all(Colors.transparent),
+          elevation: MaterialStateProperty.all(0),
         ),
-        shadowColor: MaterialStateProperty.all(Colors.transparent),
-      ),
-      child: Container(
-        alignment: Alignment.center,
-        height: MediaQuery.of(context).size.height * 0.08,
-        width: double.infinity,
-        child: isAnimated
-            ? SpinKitCircle(
-                color: borderColor,
-                size: 30,
-              )
-            : Text(
-                buttonText,
-                style: textButton.copyWith(color: borderColor),
-              ),
+        child: Container(
+          alignment: Alignment.center,
+          height: MediaQuery.of(context).size.height * 0.08,
+          width: double.infinity,
+          child: isAnimated
+              ? SpinKitCircle(
+                  color: borderColor,
+                  size: 30,
+                )
+              : Text(
+                  buttonText,
+                  style: textButton.copyWith(color: borderColor),
+                ),
+        ),
       ),
     );
   }

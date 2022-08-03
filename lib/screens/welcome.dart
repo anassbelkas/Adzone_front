@@ -4,6 +4,7 @@ import 'package:adzone/theme.dart';
 import 'package:adzone/widgets/primary_button.dart';
 import 'package:animated_background/animated_background.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key key}) : super(key: key);
@@ -16,10 +17,14 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     PrimaryButton _signUpButton = PrimaryButton(
+      height: 7.h,
+      width: 80.w,
       buttonText: 'Create an account',
       borderColor: kPrimaryColor,
     );
     PrimaryButton _signInButton = PrimaryButton(
+      height: 7.h,
+      width: 80.w,
       buttonText: 'Sign in',
       inverse: true,
     );
@@ -65,46 +70,36 @@ class _WelcomeState extends State<Welcome> with TickerProviderStateMixin {
             child: Column(
               children: [
                 // Image.asset('images/AD.png', width: 250,),
-                // SizedBox(height: 18,),
                 SizedBox(
-                  height: 50,
-                ),
-
-                Text(
-                  "Scan, Watch and EARN",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                SizedBox(
-                  height: 24,
+                  height: 10.w,
                 ),
                 Container(
+                    alignment: Alignment.center,
+                    height: 18.h,
+                    child: Text(
+                      "Scan, Watch and EARN",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+
+                Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.4,
+                  height: 30.h,
                   child: Image.asset(
                     'images/AD.png',
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20.w,
                 ),
-
+                _signInButton,
                 SizedBox(
-                  height: 150,
+                  height: 5.w,
                 ),
-                SizedBox(
-                  width: double.infinity,
-                  child: _signInButton,
-                ),
-                SizedBox(
-                  height: 22,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: _signUpButton,
-                ),
+                _signUpButton,
               ],
             ),
           ),

@@ -3,6 +3,7 @@ import 'package:adzone/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/widgets/alert/animations.dart';
 import 'package:material_dialogs/material_dialogs.dart';
+import 'package:sizer/sizer.dart';
 
 class SuccessScreen extends StatelessWidget {
   String text;
@@ -20,6 +21,8 @@ class SuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PrimaryButton _primaryButton = PrimaryButton(
+      height: 7.h,
+      width: 70.w,
       buttonText: 'Return',
       inverse: true,
     );
@@ -31,31 +34,36 @@ class SuccessScreen extends StatelessWidget {
               child: Stack(
                   // crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Align(
-                        alignment: Alignment(0, -1),
-                        child: Lottie.asset(
+                    Positioned(
+                        child: Padding(
+                          child: _primaryButton,
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.w, vertical: 5.h),
+                        ),
+                        bottom: 0,
+                        left: 0,
+                        right: 0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Lottie.asset(
                           Animations.success,
                           repeat: false,
-                          height: MediaQuery.of(context).size.height * 0.4,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                        )),
-                    Align(
-                        alignment: Alignment(0, 0),
-                        child: Text(
-                          //align center
+                          height: 40.h,
+                          width: 70.w,
+                        ),
+                        SizedBox(
+                          width: 70.w,
+                          child: Text(
+                            //align center
 
-                          text,
-                          textAlign: TextAlign.center,
-                          style: textStyle,
-                        )),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 50, vertical: 30),
-                        child: _primaryButton,
-                      ),
-                    )
+                            text,
+                            textAlign: TextAlign.center,
+                            style: textStyle,
+                          ),
+                        )
+                      ],
+                    ),
                   ]))),
     );
   }

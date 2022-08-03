@@ -2,42 +2,21 @@ import 'package:adzone/screens/Settings.dart';
 import 'package:adzone/screens/home.dart';
 import 'package:adzone/screens/rewards.dart';
 import 'package:adzone/screens/achievements.dart';
+import 'package:adzone/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
 
 class Profil extends StatelessWidget {
+  PrimaryButton _primaryButton = PrimaryButton(
+    buttonText: 'Sign Out',
+    borderColor: kPrimaryColor,
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         child: ListView(
           children: <Widget>[
-            Container(
-              height: 85,
-              child: Stack(
-                children: [
-                  Positioned(
-                      top: -15,
-                      left: -15,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Color(0xFFFA7850)),
-                        width: 100,
-                        height: 100,
-                        child: TextButton(
-                            style: TextButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                primary: Colors.white),
-                            onPressed: () => Navigator.of(context).pop(),
-                            child: Icon(IconData(0xe092,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true))),
-                      )),
-                ],
-              ),
-            ),
             Center(
               child: Text(
                 "Profile",
@@ -259,21 +238,7 @@ class Profil extends StatelessWidget {
                       margin: const EdgeInsets.all(8),
                       padding: const EdgeInsets.all(12)),
                   SizedBox(height: 15),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Color(0xFFFA7850), width: 2),
-                        borderRadius: BorderRadius.all(Radius.circular(10))),
-                    child: TextButton(
-                      style: TextButton.styleFrom(primary: Color(0xFFFA7850)),
-                      onPressed: () {},
-                      child: Text(
-                        "Sign out",
-                        style: TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  )
+                  _primaryButton
                 ],
               ),
             ),

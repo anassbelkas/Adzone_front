@@ -8,6 +8,7 @@ import 'package:adzone/widgets/primary_button.dart';
 import 'package:adzone/providers/authentication.dart';
 import 'package:material_dialogs/material_dialogs.dart';
 import 'package:animations/animations.dart';
+import 'package:sizer/sizer.dart';
 
 class LogInScreen extends StatelessWidget {
   final LoginController _loginController = LoginController();
@@ -20,6 +21,8 @@ class LogInScreen extends StatelessWidget {
   bool _isDisabled = false;
   final PrimaryButton _primaryButton = PrimaryButton(
     buttonText: 'Sign in',
+    height: 7.h,
+    width: 70.w,
   );
 
   void _login(BuildContext context) async {
@@ -73,17 +76,68 @@ class LogInScreen extends StatelessWidget {
         );
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: Padding(
           padding: kDefaultPadding,
-          child: SingleChildScrollView(
-            child: Column(
+          child: Stack(children: [
+            Positioned(
+                bottom: 0,
+                //center the child
+                left: 0,
+                right: 0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [_primaryButton],
+                    ),
+                    SizedBox(
+                      height: 3.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Don’t have an account?',
+                          style: subTitle,
+                        ),
+                        SizedBox(
+                          width: 2.w,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignUpScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'Sign Up',
+                            style: textButton.copyWith(
+                              decoration: TextDecoration.underline,
+                              decorationThickness: 2,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 3.h,
+                    )
+                  ],
+                )),
+            Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 60,
+                  height: 5.h,
                 ),
                 Container(
                     //center child
+                    height: 20.h,
                     alignment: Alignment.center,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -105,15 +159,10 @@ class LogInScreen extends StatelessWidget {
                         )
                       ],
                     )),
-                SizedBox(
-                  height: 60,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
+
                 _logInForm,
                 SizedBox(
-                  height: 20,
+                  height: 3.h,
                 ),
                 GestureDetector(
                     onTap: () {
@@ -136,46 +185,6 @@ class LogInScreen extends StatelessWidget {
                       ),
                     )),
 
-                SizedBox(
-                  height: 210,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  child: _primaryButton,
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Don’t have an account?',
-                      style: subTitle,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SignUpScreen(),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Sign Up',
-                        style: textButton.copyWith(
-                          decoration: TextDecoration.underline,
-                          decorationThickness: 2,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
                 // Text(
                 //   'Or log in with:',
                 //   style: subTitle.copyWith(color: kWhiteColor),
@@ -185,8 +194,8 @@ class LogInScreen extends StatelessWidget {
                 // ),
                 // LoginOption(),
               ],
-            ),
-          ),
+            )
+          ]),
         ),
         backgroundColor: kPrimaryColor,
       ),

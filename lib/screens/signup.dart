@@ -7,11 +7,14 @@ import 'package:adzone/widgets/login_option.dart';
 import 'package:adzone/widgets/primary_button.dart';
 import 'package:adzone/widgets/signup_form.dart';
 import 'package:adzone/providers/authentication.dart';
+import 'package:sizer/sizer.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpController _signUpController = SignUpController();
   final AuthenticationApi _authenticationApi = AuthenticationApi();
   PrimaryButton _primaryButton = PrimaryButton(
+    height: 7.h,
+    width: 70.w,
     buttonText: 'Sign Up',
   );
   CheckBoxController _checkBoxController = CheckBoxController();
@@ -122,26 +125,78 @@ class SignUpScreen extends StatelessWidget {
           child: _signUpForm,
         ),
         SizedBox(
-          height: 20,
+          height: 2.h,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 60),
+          padding: EdgeInsets.only(left: 15.w),
           child: _checkBox,
         ),
         SizedBox(
-          height: 20,
+          height: 2.h,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 60),
+          padding: EdgeInsets.only(left: 15.w),
           child: _checkBox2,
-        ),
-        SizedBox(
-          height: 150,
         ),
       ],
     );
     return Scaffold(
-      body: Stack(children: [_column, _column2]),
+      resizeToAvoidBottomInset: false,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            height: 3.h,
+          ),
+          Container(
+            height: 10.h,
+            alignment: Alignment.center,
+            child: Text(
+              'Create Account',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: kWhiteColor,
+              ),
+            ),
+          ),
+          _column2,
+          SizedBox(
+            height: 6.h,
+          ),
+          _primaryButton,
+          SizedBox(
+            height: 2.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Already a member?',
+                style: subTitle,
+              ),
+              SizedBox(
+                width: 2.w,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LogInScreen()));
+                },
+                child: Text(
+                  'Log In',
+                  style: textButton.copyWith(
+                    decoration: TextDecoration.underline,
+                    decorationThickness: 2,
+                  ),
+                ),
+              )
+            ],
+          )
+        ],
+      ),
       backgroundColor: kPrimaryColor,
     );
   }
