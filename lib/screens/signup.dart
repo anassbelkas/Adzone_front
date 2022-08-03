@@ -30,8 +30,7 @@ class SignUpScreen extends StatelessWidget {
         print(formData['email']);
         //delay 5 seconds
         _authenticationApi
-            .signup(formData['firstName'], formData['lastName'],
-                formData['email'], formData['password'])
+            .signup(formData['email'], formData['password'])
             .then((value) {
           if (value.success) {
             Navigator.pushReplacement(
@@ -142,61 +141,79 @@ class SignUpScreen extends StatelessWidget {
     );
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 3.h,
-          ),
-          Container(
-            height: 10.h,
-            alignment: Alignment.center,
-            child: Text(
-              'Create Account',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: kWhiteColor,
+      body: Stack(children: [
+        Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Column(
+              children: [
+                _primaryButton,
+                SizedBox(
+                  height: 2.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Already a member?',
+                      style: subTitle,
+                    ),
+                    SizedBox(
+                      width: 2.w,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LogInScreen()));
+                      },
+                      child: Text(
+                        'Log In',
+                        style: textButton.copyWith(
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 2,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 3.5.h,
+                ),
+              ],
+            )),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 3.h,
+            ),
+            Container(
+              height: 10.h,
+              alignment: Alignment.center,
+              child: Text(
+                'Create Account',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: kWhiteColor,
+                ),
               ),
             ),
-          ),
-          _column2,
-          SizedBox(
-            height: 6.h,
-          ),
-          _primaryButton,
-          SizedBox(
-            height: 2.h,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Already a member?',
-                style: subTitle,
-              ),
-              SizedBox(
-                width: 2.w,
-              ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => LogInScreen()));
-                },
-                child: Text(
-                  'Log In',
-                  style: textButton.copyWith(
-                    decoration: TextDecoration.underline,
-                    decorationThickness: 2,
-                  ),
-                ),
-              )
-            ],
-          )
-        ],
-      ),
+            SizedBox(
+              height: 5.h,
+            ),
+            _column2,
+            SizedBox(
+              height: 6.h,
+            ),
+          ],
+        )
+      ]),
       backgroundColor: kPrimaryColor,
     );
   }

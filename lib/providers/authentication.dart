@@ -29,15 +29,10 @@ class AuthenticationApi {
     }
   }
 
-  Future<ResponseModel> signup(String first_name, String last_name,
-      String email, String password) async {
+  Future<ResponseModel> signup(String email, String password) async {
     try {
-      final response = await _dio.post(SERVER_URL + '/auth/signup', data: {
-        "first_name": first_name,
-        "last_name": last_name,
-        "email": email,
-        "password": password
-      });
+      final response = await _dio.post(SERVER_URL + '/auth/signup',
+          data: {"email": email, "password": password});
       final responseData = ResponseModel.fromJson(response.data);
       return responseData;
     } catch (e) {
