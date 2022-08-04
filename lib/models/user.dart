@@ -4,9 +4,9 @@ class User {
   final String last_name;
   final String email;
   final String password;
-  final String active;
+  final bool active;
   final String image;
-  final String points;
+  final int points;
   final String last_reward;
   final String created_at;
   final String updated_at;
@@ -38,6 +38,20 @@ class User {
         json['created_at'],
         json['updated_at']);
   }
+  //to json
+  Map<String, dynamic> toJson() => {
+        '_id': _id,
+        'first_name': first_name,
+        'last_name': last_name,
+        'email': email,
+        'password': password,
+        'active': active,
+        'image': image,
+        'points': points,
+        'last_reward': last_reward,
+        'created_at': created_at,
+        'updated_at': updated_at,
+      };
 
   // NOTE: implementing functionality here in the next step!
 }

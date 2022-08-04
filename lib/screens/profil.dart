@@ -1,86 +1,35 @@
+import 'package:adzone/models/user.dart';
+import 'package:adzone/providers/profile.dart';
 import 'package:adzone/screens/Settings.dart';
 import 'package:adzone/screens/home.dart';
 import 'package:adzone/screens/rewards.dart';
 import 'package:adzone/screens/achievements.dart';
+import 'package:adzone/utils/constants.dart';
 import 'package:adzone/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:sizer/sizer.dart';
 
 class Profil extends StatelessWidget {
   PrimaryButton _primaryButton = PrimaryButton(
     buttonText: 'Sign Out',
     borderColor: kPrimaryColor,
+    height: 7.h,
   );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: ListView(
-          children: <Widget>[
-            Center(
-              child: Text(
-                "Profile",
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
-              ),
-            ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
+        child: Column(
+          children: [
             Container(
               padding: EdgeInsets.only(left: 16, top: 25, right: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Center(
-                    child: Stack(
-                      children: [
-                        Container(
-                          width: 130,
-                          height: 130,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  width: 2, color: Color(0xFFFA7850)),
-                              boxShadow: [
-                                BoxShadow(
-                                    spreadRadius: 2,
-                                    blurRadius: 10,
-                                    color: Colors.black.withOpacity(0.2),
-                                    offset: Offset(10, 10))
-                              ],
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: NetworkImage(
-                                      "https://picsum.photos/250?image=9"))),
-                        ),
-                        Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFFA7850),
-                                  shape: BoxShape.circle),
-                              child: Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                            ))
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Text("First name",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w900)),
-                  Text("Last name",
-                      style:
-                          TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
-                  SizedBox(height: 10),
-                  Container(
-                    child: Text("Joined time ago"),
-                    padding: EdgeInsets.only(left: 25),
-                  ),
+                  AvatarHead(),
                   SizedBox(height: 10),
                   Container(
                       decoration: BoxDecoration(
@@ -245,6 +194,95 @@ class Profil extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class AvatarHead extends StatefulWidget {
+  @override
+  _AvatarHeadState createState() => _AvatarHeadState();
+}
+
+class _AvatarHeadState extends State<AvatarHead> {
+  ProfileApi profileApi = ProfileApi();
+  var image = NetworkImage(SERVER_URL + '/placeholders/user_image.jpg');
+  int daysSinceJoined = 0;
+  User user;
+  @override
+  void initState() {
+    super.initState();
+    profileApi.getUser().then((value) {
+      setState(() {
+        // print(value.email);
+        image = NetworkImage(SERVER_URL + '/images/' + value.image);
+        //calculate number of days since when user joined
+        var date = DateTime.parse(value.created_at);
+        var difference = DateTime.now().difference(date);
+        daysSinceJoined = difference.inDays;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      // mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        GestureDetector(
+            onTap: () => null,
+            child: Center(
+              child: Stack(
+                children: [
+                  Container(
+                    width: 130,
+                    height: 130,
+                    decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                              // spreadRadius: 2,
+                              blurRadius: 2,
+                              color: Colors.black.withOpacity(0.2),
+                              offset: Offset(0, 5))
+                        ],
+                        shape: BoxShape.circle,
+                        image:
+                            DecorationImage(fit: BoxFit.cover, image: image)),
+                  ),
+                  Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                              // spreadRadius: 2,
+                              blurRadius: 2,
+                              color: Colors.black.withOpacity(0.2),
+                              offset: Offset(0, 5))
+                        ], color: kWhiteColor, shape: BoxShape.circle),
+                        child: Icon(
+                          Iconsax.user_edit,
+                          color: kGreyColor,
+                        ),
+                      ))
+                ],
+              ),
+            )),
+        SizedBox(
+          height: 3.h,
+        ),
+        Text(user?.first_name ?? 'Jack',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900)),
+        Text(user?.last_name ?? 'Sparow',
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
+        SizedBox(height: 10),
+        Container(
+          child: Text('Joined $daysSinceJoined days ago',
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300)),
+        )
+      ],
     );
   }
 }
