@@ -67,7 +67,7 @@ class _NavbarState extends State<Navbar> {
                       text: 'Map',
                     ),
                     GButton(
-                      icon: Iconsax.camera,
+                      icon: Iconsax.scan,
                       iconActiveColor: kPrimaryColor,
                       iconColor: kGreyColor,
                       textColor: kPrimaryColor,

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
-import 'package:eventify/eventify.dart';
-
-final EventEmitter emitter = new EventEmitter();
 
 class LoginController {
   var validate;
@@ -24,11 +21,6 @@ class LogInForm extends StatefulWidget {
   }) : assert(controller != null);
   @override
   _LogInFormState createState() => _formState;
-
-  //validate emitter
-  void validate() {
-    emitter.emit('validate', this);
-  }
 }
 
 class _LogInFormState extends State<LogInForm> {
@@ -65,9 +57,6 @@ class _LogInFormState extends State<LogInForm> {
 
   @override
   Widget build(BuildContext context) {
-    emitter.on('validate', null, (ev, ctx) {
-      _formKey.currentState.validate();
-    });
     return Form(
       key: _formKey,
       child: Column(

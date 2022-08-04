@@ -12,20 +12,17 @@ import 'package:sizer/sizer.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpController _signUpController = SignUpController();
   final AuthenticationApi _authenticationApi = AuthenticationApi();
-  PrimaryButton _primaryButton = PrimaryButton(
-    height: 7.h,
-    width: 70.w,
-    buttonText: 'Sign Up',
-  );
+  final PrimaryButtonController _primaryButtonController =
+      PrimaryButtonController();
   CheckBoxController _checkBoxController = CheckBoxController();
   CheckBoxController _checkBoxController2 = CheckBoxController();
   bool _isDisabled = false;
 
-  void _signUp(BuildContext context) async {
+  void _signUp(BuildContext context, Function changeState) async {
     if (_signUpController.validate()) {
       if (_checkBoxController.validate() && _checkBoxController2.validate()) {
         _isDisabled = true;
-        _primaryButton.changeState('animate');
+        changeState('animate');
         var formData = _signUpController.getFormData();
         print(formData['email']);
         //delay 5 seconds
@@ -40,7 +37,7 @@ class SignUpScreen extends StatelessWidget {
               ),
             );
           } else {
-            _primaryButton.changeState('idle');
+            changeState('idle');
             _signUpController.setError(value.message);
           }
         });
@@ -50,13 +47,20 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    PrimaryButton _primaryButton = PrimaryButton(
+      height: 7.h,
+      width: 70.w,
+      buttonText: 'Sign Up',
+      controller: _primaryButtonController,
+    );
     SignUpForm _signUpForm = SignUpForm(controller: _signUpController);
     CheckBox _checkBox = CheckBox('I agree to the terms and conditions',
         controller: _checkBoxController);
     CheckBox _checkBox2 = CheckBox('I have at least 18 years old.',
         controller: _checkBoxController2);
 
-    _primaryButton.onPressed = () => _signUp(context);
+    _primaryButton.onPressed =
+        () => _signUp(context, _primaryButtonController.changeState);
     Column _column = Column(
       //space between the elements
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

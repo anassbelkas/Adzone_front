@@ -11,11 +11,11 @@ import 'package:sizer/sizer.dart';
 class OTPScreen extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final AuthenticationApi _api = AuthenticationApi();
-  String userEmail;
+  final String userEmail;
+  final PrimaryButtonController _primaryButtonController =
+      PrimaryButtonController();
   OTPScreen({Key key, @required this.userEmail}) : super(key: key);
-  final PrimaryButton _primaryButton = PrimaryButton(
-    buttonText: 'Verify',
-  );
+
   //6 text controllers for the 6 digits of the OTP
   final _textController1 = TextEditingController();
   final _textController2 = TextEditingController();
@@ -36,13 +36,17 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PrimaryButton _primaryButton = PrimaryButton(
+      buttonText: 'Verify',
+      controller: _primaryButtonController,
+    );
     CountdownController _countdownController = CountdownController();
     _primaryButton.onPressed = () {
       // print(_formKey.currentState.validate());
       // print(getOTP());
 
       if (_formKey.currentState.validate()) {
-        _primaryButton.changeState('animate');
+        _primaryButtonController.changeState('animate');
         _api.verifyAccount(getOTP()).then((value) {
           if (value.success) {
             Navigator.pushReplacement(
@@ -52,7 +56,7 @@ class OTPScreen extends StatelessWidget {
               ),
             );
           } else {
-            _primaryButton.changeState('idle');
+            _primaryButtonController.changeState('idle');
             _formKey.currentState.reset();
             _textController1.clear();
             _textController2.clear();

@@ -1,6 +1,7 @@
 import 'package:adzone/screens/login.dart';
 import 'package:adzone/screens/profil.dart';
 import 'package:adzone/screens/signup.dart';
+import 'package:adzone/screens/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/routes.dart';
 import 'package:adzone/widgets/navbar.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'DM Sans'),
-        home: Navbar(),
+        home: Welcome(),
         routes: routes,
       );
     }));

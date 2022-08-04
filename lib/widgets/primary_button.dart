@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
-import 'package:eventify/eventify.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-final EventEmitter emitter = new EventEmitter();
+class PrimaryButtonController {
+  Function changeState;
+
+  void dispose() {
+    changeState = null;
+  }
+}
 
 class PrimaryButton extends StatefulWidget {
   String buttonText;
@@ -12,27 +17,22 @@ class PrimaryButton extends StatefulWidget {
   Color borderColor;
   double width;
   double height;
+  PrimaryButtonController controller;
   PrimaryButton(
       {@required this.buttonText,
       this.onPressed,
       this.inverse = false,
       this.borderColor = kWhiteColor,
       this.width = double.infinity,
-      this.height = 50});
-  _PrimaryButton __primaryButton = _PrimaryButton();
+      this.height = 50,
+      this.controller});
   @override
-  State<StatefulWidget> createState() {
-    return __primaryButton;
-  }
-
-  //change state
-  void changeState(String state) {
-    emitter.emit('changeState', this, state);
-  }
+  State<StatefulWidget> createState() => _PrimaryButton();
 }
 
 class _PrimaryButton extends State<PrimaryButton> {
   String buttonText;
+  String initialText;
   bool isAnimated = false;
   bool inverse;
   Color borderColor;
@@ -43,27 +43,34 @@ class _PrimaryButton extends State<PrimaryButton> {
   void initState() {
     super.initState();
     buttonText = widget.buttonText;
+    initialText = buttonText;
     inverse = widget.inverse;
     borderColor = widget.borderColor;
     width = widget.width;
     height = widget.height;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    emitter.on('changeState', null, (ev, ctx) {
-      if (ev.eventData == 'animate') {
+    widget.controller?.changeState = (state) {
+      if (state == 'animate') {
         setState(() {
           buttonText = "Loading...";
           isAnimated = true;
         });
       } else {
         setState(() {
-          buttonText = "Sign in";
+          buttonText = initialText;
           isAnimated = false;
         });
       }
-    });
+    };
+  }
+
+  @override
+  void dispose() {
+    widget.controller?.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       width: width,
       height: height,

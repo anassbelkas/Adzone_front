@@ -15,23 +15,20 @@ class LogInScreen extends StatelessWidget {
   final AuthenticationApi _authenticationApi = AuthenticationApi();
   final SharedAxisTransitionType _transitionType =
       SharedAxisTransitionType.scaled;
+  final PrimaryButtonController _primaryButtonController =
+      PrimaryButtonController();
   //constructor
   LogInScreen({Key key}) : super(key: key);
 
   bool _isDisabled = false;
-  final PrimaryButton _primaryButton = PrimaryButton(
-    buttonText: 'Sign in',
-    height: 7.h,
-    width: 70.w,
-  );
 
-  void _login(BuildContext context) async {
+  void _login(BuildContext context, Function changeState) async {
     if (_isDisabled) {
       return;
     }
     if (_loginController.validate()) {
       _isDisabled = true;
-      _primaryButton.changeState('animate');
+      changeState('animate');
       var formData = _loginController.getFormData();
       //delay 5 seconds
 
@@ -47,7 +44,7 @@ class LogInScreen extends StatelessWidget {
           );
         } else {
           _isDisabled = false;
-          _primaryButton.changeState('idle');
+          changeState('idle');
           _loginController.setError(value.message);
         }
       });
@@ -56,9 +53,16 @@ class LogInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final PrimaryButton _primaryButton = PrimaryButton(
+      buttonText: 'Sign in',
+      height: 7.h,
+      width: 70.w,
+      controller: _primaryButtonController,
+    );
     LogInForm _logInForm = LogInForm(controller: _loginController);
     //run function after 5 seconds
-    _primaryButton.onPressed = () => _login(context);
+    _primaryButton.onPressed =
+        () => _login(context, _primaryButtonController.changeState);
 
     return PageTransitionSwitcher(
       duration: const Duration(milliseconds: 300),
