@@ -143,42 +143,56 @@ class Achievements extends StatelessWidget {
                 itemCount: achievements.length,
                 itemBuilder: ((context, index) {
                   return Container(
-                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 3),
-                    height: 50,
-                    child: Row(children: [
-                      Icon(
-                        achievements[index]['iconPath'],
-                        color: achievements[index]['iconColor'],
-                        size: 40,
-                      ),
-                      Text(
-                        achievements[index]['name'],
-                        style: TextStyle(fontSize: 15),
-                      ),
-                      Spacer(),
-                      Container(
-                        margin: EdgeInsets.only(right: 5),
-                        padding: EdgeInsets.only(
-                            top: 3, bottom: 3, left: 8, right: 8),
-                        decoration: BoxDecoration(
-                            color: achievements[index]['progression'] ==
-                                    achievements[index]['goal']
-                                ? Color(0xFFFA7850)
-                                : Color.fromARGB(255, 200, 200, 200),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(20))),
-                        child: Text(
-                            achievements[index]['progression'] +
-                                '/' +
-                                achievements[index]['goal'],
-                            style: TextStyle(
-                                color: achievements[index]['progression'] ==
-                                        achievements[index]['goal']
-                                    ? Colors.white
-                                    : Colors.black)),
-                      )
-                    ]),
-                  );
+                      margin: EdgeInsets.only(left: 15, right: 15, bottom: 3),
+                      height: 50,
+                      child: Stack(
+                        children: [
+                          Row(children: [
+                            Icon(
+                              achievements[index]['iconPath'],
+                              color: achievements[index]['iconColor'],
+                              size: 40,
+                            ),
+                            Text(
+                              achievements[index]['name'],
+                              style: TextStyle(fontSize: 15),
+                            ),
+                            Spacer(),
+                            Container(
+                              margin: EdgeInsets.only(right: 5),
+                              padding: EdgeInsets.only(
+                                  top: 3, bottom: 3, left: 8, right: 8),
+                              decoration: BoxDecoration(
+                                  color: achievements[index]['progression'] ==
+                                          achievements[index]['goal']
+                                      ? Color(0xFFFA7850)
+                                      : Color.fromARGB(255, 200, 200, 200),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              child: Text(
+                                  achievements[index]['progression'] +
+                                      '/' +
+                                      achievements[index]['goal'],
+                                  style: TextStyle(
+                                      color: achievements[index]
+                                                  ['progression'] ==
+                                              achievements[index]['goal']
+                                          ? Colors.white
+                                          : Colors.black)),
+                            ),
+                          ]),
+                          achievements[index]['progression'] ==
+                                  achievements[index]['goal']
+                              ? Positioned(
+                                  top: -2,
+                                  right: -4,
+                                  child: Icon(
+                                      IconData(0xe156,
+                                          fontFamily: 'MaterialIcons'),
+                                      color: Color.fromARGB(255, 6, 202, 13)))
+                              : Container(),
+                        ],
+                      ));
                 }),
               ),
             ),
