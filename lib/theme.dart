@@ -8,6 +8,7 @@ const kWhiteColor = Color.fromARGB(255, 255, 255, 255);
 const kZambeziColor = Color(0xFF5B5B5B);
 const kBlackColor = Color(0xFF272726);
 const kLightGreyColor = Color(0xFF9B9B9B);
+const kPurpleColor = Color(0xFF330033);
 const kGreyColor = Color(0xFF8C8C8C);
 const kTextFieldColor = Color.fromARGB(255, 200, 200, 200);
 const kadzone = Color(0xFFFAF7F2);

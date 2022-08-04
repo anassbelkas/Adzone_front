@@ -51,30 +51,12 @@ class AuthenticationApi {
     }
   }
 
-  Future<User> getUser() async {
-    try {
-      final token = await storage.read(key: 'token');
-      final response = await _dio.get(SERVER_URL + '/auth/user',
-          options: Options(headers: {'Authorization': token}));
-      if (response.statusCode == 200) {
-        final user = User.fromJson(response.data);
-        return user;
-      } else {
-        throw Exception(response.data['msg']);
-      }
-    } catch (e) {
-      print(e);
-      return null;
-    }
-  }
-
-  Future<String> logout() async {
+  Future<bool> logout() async {
     try {
       storage.delete(key: 'token');
-      return "Logout Successful";
+      return true;
     } catch (e) {
-      print(e);
-      return e.toString();
+      return false;
     }
   }
 

@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:adzone/models/user.dart';
+import 'package:adzone/providers/authentication.dart';
 import 'package:adzone/providers/profile.dart';
 import 'package:adzone/screens/Settings.dart';
 import 'package:adzone/screens/home.dart';
+import 'package:adzone/screens/login.dart';
 import 'package:adzone/screens/rewards.dart';
 import 'package:adzone/screens/achievements.dart';
 import 'package:adzone/utils/constants.dart';
@@ -9,185 +13,102 @@ import 'package:adzone/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 
 class Profil extends StatelessWidget {
+  AuthenticationApi _authenticationApi = AuthenticationApi();
   PrimaryButton _primaryButton = PrimaryButton(
     buttonText: 'Sign Out',
     borderColor: kPrimaryColor,
     height: 7.h,
   );
+
+  GestureDetector profileLinks(BuildContext context, String text, IconData icon,
+      {Function onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+          child: Row(children: <Widget>[
+            Icon(
+              icon,
+              color: kPrimaryColor,
+            ),
+            SizedBox(
+              width: 3.w,
+            ),
+            Text(
+              text,
+              style: TextStyle(fontSize: 16, color: kPurpleColor),
+            ),
+            Spacer(),
+            Icon(Iconsax.arrow_right_3, color: kPrimaryColor),
+          ]),
+          // margin: const EdgeInsets.all(8),
+          padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 2.h)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    _primaryButton.onPressed = () {
+      _authenticationApi.logout().then((value) {
+        if (value) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LogInScreen(),
+            ),
+          );
+        }
+      });
+    };
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-        child: Column(
+        child: Stack(
           children: [
+            Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                  child: _primaryButton,
+                )),
             Container(
-              padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+              padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 4.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AvatarHead(),
-                  SizedBox(height: 10),
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFA7850),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Row(children: <Widget>[
-                        Icon(IconData(0xe595, fontFamily: 'MaterialIcons')),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          'Saved Locations',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Spacer(),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                primary: Colors.black),
-                            onPressed: () {},
-                            child: Icon(IconData(0xe09c,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true)))
-                      ]),
-                      margin: const EdgeInsets.all(8),
-                      padding: const EdgeInsets.all(12)),
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFA7850),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Row(children: <Widget>[
-                        Icon(IconData(0xf7c4, fontFamily: 'MaterialIcons')),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          'Claimed Rewards',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Spacer(),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                primary: Colors.black),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Rewards()),
-                              );
-                            },
-                            child: Icon(IconData(0xe09c,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true)))
-                      ]),
-                      margin: const EdgeInsets.all(8),
-                      padding: const EdgeInsets.all(12)),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFA7850),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Row(children: <Widget>[
-                      Icon(IconData(0xeff0, fontFamily: 'MaterialIcons')),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'Achievements',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Spacer(),
-                      TextButton(
-                          style: TextButton.styleFrom(
-                            minimumSize: Size.zero,
-                            padding: EdgeInsets.zero,
-                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                            primary: Colors.black,
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Achievements()),
-                            );
-                          },
-                          child: Icon(IconData(0xe09c,
-                              fontFamily: 'MaterialIcons',
-                              matchTextDirection: true)))
-                    ]),
-                    margin: const EdgeInsets.all(8),
-                    padding: const EdgeInsets.all(12),
-                  ),
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFA7850),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Row(children: <Widget>[
-                        Icon(IconData(0xe57f, fontFamily: 'MaterialIcons')),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          'Settings',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Spacer(),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                primary: Colors.black),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Settings()),
-                              );
-                            },
-                            child: Icon(IconData(0xe09c,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true)))
-                      ]),
-                      margin: const EdgeInsets.all(8),
-                      padding: const EdgeInsets.all(12)),
-                  Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFA7850),
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: Row(children: <Widget>[
-                        Icon(IconData(0xf695, fontFamily: 'MaterialIcons')),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Text(
-                          'Delete Account',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        Spacer(),
-                        TextButton(
-                            style: TextButton.styleFrom(
-                                minimumSize: Size.zero,
-                                padding: EdgeInsets.zero,
-                                tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                primary: Colors.black),
-                            onPressed: () {},
-                            child: Icon(IconData(0xe09c,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true)))
-                      ]),
-                      margin: const EdgeInsets.all(8),
-                      padding: const EdgeInsets.all(12)),
-                  SizedBox(height: 15),
-                  _primaryButton
+                  SizedBox(height: 3.h),
+                  profileLinks(context, 'Saved Locations', Iconsax.location,
+                      onTap: () {}),
+                  profileLinks(context, 'Claimed Rewards',
+                      IconData(0xf7c4, fontFamily: 'MaterialIcons'), onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Rewards()),
+                    );
+                  }),
+                  profileLinks(
+                      context, 'Achievements', Iconsax.notification_status,
+                      onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Achievements()),
+                    );
+                  }),
+                  profileLinks(context, 'Settings', Iconsax.settings,
+                      onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Settings()),
+                    );
+                  }),
+                  profileLinks(context, 'Delete Account', Iconsax.trash,
+                      onTap: () {}),
                 ],
               ),
             ),
@@ -205,21 +126,29 @@ class AvatarHead extends StatefulWidget {
 
 class _AvatarHeadState extends State<AvatarHead> {
   ProfileApi profileApi = ProfileApi();
-  var image = NetworkImage(SERVER_URL + '/placeholders/user_image.jpg');
+  NetworkImage image =
+      NetworkImage(SERVER_URL + '/placeholders/user_image.jpg');
   int daysSinceJoined = 0;
-  User user;
+  String firstName = 'Jack';
+  String lastName = 'Sparow';
+  final ImagePicker _picker = ImagePicker();
   @override
   void initState() {
     super.initState();
     profileApi.getUser().then((value) {
-      setState(() {
-        // print(value.email);
-        image = NetworkImage(SERVER_URL + '/images/' + value.image);
-        //calculate number of days since when user joined
-        var date = DateTime.parse(value.created_at);
-        var difference = DateTime.now().difference(date);
-        daysSinceJoined = difference.inDays;
-      });
+      if (value != null) {
+        setState(() {
+          firstName = value.first_name ?? 'Jack';
+          lastName = value.last_name ?? 'Sparow';
+          value.image != null
+              ? image = NetworkImage(SERVER_URL + '/images/' + value.image)
+              : image = const NetworkImage(
+                  SERVER_URL + '/placeholders/user_image.jpg');
+          var date = DateTime.parse(value.created_at);
+          var difference = DateTime.now().difference(date);
+          daysSinceJoined = difference.inDays;
+        });
+      }
     });
   }
 
@@ -230,7 +159,20 @@ class _AvatarHeadState extends State<AvatarHead> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         GestureDetector(
-            onTap: () => null,
+            onTap: () {
+              _picker.pickImage(source: ImageSource.gallery).then((value) {
+                if (value != null) {
+                  profileApi.updateAvatar(File(value.path)).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        image =
+                            NetworkImage(SERVER_URL + '/images/' + value.image);
+                      });
+                    }
+                  });
+                }
+              });
+            },
             child: Center(
               child: Stack(
                 children: [
@@ -273,9 +215,9 @@ class _AvatarHeadState extends State<AvatarHead> {
         SizedBox(
           height: 3.h,
         ),
-        Text(user?.first_name ?? 'Jack',
+        Text(firstName,
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900)),
-        Text(user?.last_name ?? 'Sparow',
+        Text(lastName,
             style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
         SizedBox(height: 10),
         Container(
