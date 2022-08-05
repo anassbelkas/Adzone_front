@@ -6,7 +6,12 @@ import 'package:sizer/sizer.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    Key key, this.height=160, this.width=160, this.aspectRection=1.02,@required this.product,@required this.press,
+    Key key,
+    this.height = 160,
+    this.width = 160,
+    this.aspectRection = 1.02,
+    @required this.product,
+    @required this.press,
   }) : super(key: key);
 
   final double width, aspectRection, height;
@@ -24,7 +29,7 @@ class ProductCard extends StatelessWidget {
 //           child: Column(
 //             children: [
 //               AspectRatio(
-//                 aspectRatio: aspectRection, 
+//                 aspectRatio: aspectRection,
 //                 child: Container(
 //                   padding: EdgeInsets.all(getProportionateScreenWidth(10)),
 //                   decoration: BoxDecoration(
@@ -48,7 +53,7 @@ class ProductCard extends StatelessWidget {
 //                       width: getProportionateScreenWidth(28),
 //                       height: getProportionateScreenWidth(28),
 //                       decoration: BoxDecoration(
-//                         color: product.isFavourite 
+//                         color: product.isFavourite
 //                         ? kPrimaryColor.withOpacity(0.15)
 //                         : kTextFieldColor.withOpacity(0.3),
 //                         shape: BoxShape.circle,
@@ -68,7 +73,6 @@ class ProductCard extends StatelessWidget {
 //   }
 // }
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -78,66 +82,77 @@ class ProductCard extends StatelessWidget {
         child: SizedBox(
           width: 45.w,
           height: 30.w,
-          child: 
-              AspectRatio(
-                aspectRatio: aspectRection, 
-                child: Container(
-                  padding: EdgeInsets.all(2.w),
-                  decoration: BoxDecoration(
-                    color: kGreyColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(15)
+          child: AspectRatio(
+            aspectRatio: aspectRection,
+            child: Container(
+              padding: EdgeInsets.all(2.w),
+              decoration: BoxDecoration(
+                  color: kGreyColor.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(15)),
+              child: Stack(
+                overflow: Overflow.visible,
+                children: [
+                  Positioned(
+                    top: -10.w,
+                    right: -1.w,
+                    child: Image.asset(product.images[0], width: 30.w),
                   ),
-                  child: Stack(
-                    overflow: Overflow.visible,
-                        children: [
-                          Positioned(
-                                      top: -10.w,
-                                      right: -1.w,
-                                      child: Image.asset(product.images[0], width: 30.w),),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text("${product.price} Points", style: TextStyle(fontSize: 12.sp, color: kGreenColor, fontWeight: FontWeight.bold),),
-                                SizedBox(height: 1.w,),
-                                Text(product.title, style: TextStyle(fontSize: 13.sp, color: Colors.black, fontWeight: FontWeight.bold), maxLines: 2,),
-                              ],
-                            ),
-
-                          // const SizedBox(height: 5,),
-                          // Text(product.title, style: TextStyle(fontSize: 14.sp, color: Colors.black, fontWeight: FontWeight.bold), maxLines: 2,),
-                          // Row(
-                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //   children: [
-                          //     InkWell(
-                          //       borderRadius: BorderRadius.circular(30),
-                          //       onTap: () {},
-                          //       child: Container(
-                          //         // padding: EdgeInsets.all(getProportionateScreenWidth(10)),
-                          //         width: getProportionateScreenWidth(28),
-                          //         height: getProportionateScreenWidth(28),
-                          //         decoration: BoxDecoration(
-                          //           color: product.isFavourite 
-                          //           ? kPrimaryColor.withOpacity(0.15)
-                          //           : kTextFieldColor.withOpacity(0.3),
-                          //           shape: BoxShape.circle,
-                          //         ),
-                          //         child: Icon(Icons.check, color: product.isFavourite
-                          //         ? Color(0xFFFF4848)
-                          //         : Colors.white),
-                          //       ),
-                          //     ),
-                          //   ],
-                          // )
-                        ],
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "${product.price} Points",
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            color: kGreenColor,
+                            fontWeight: FontWeight.bold),
                       ),
-                      
-                ),
+                      SizedBox(
+                        height: 1.w,
+                      ),
+                      Text(
+                        product.title,
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                        maxLines: 2,
+                      ),
+                    ],
+                  ),
+
+                  // const SizedBox(height: 5,),
+                  // Text(product.title, style: TextStyle(fontSize: 14.sp, color: Colors.black, fontWeight: FontWeight.bold), maxLines: 2,),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   children: [
+                  //     InkWell(
+                  //       borderRadius: BorderRadius.circular(30),
+                  //       onTap: () {},
+                  //       child: Container(
+                  //         // padding: EdgeInsets.all(getProportionateScreenWidth(10)),
+                  //         width: getProportionateScreenWidth(28),
+                  //         height: getProportionateScreenWidth(28),
+                  //         decoration: BoxDecoration(
+                  //           color: product.isFavourite
+                  //           ? kPrimaryColor.withOpacity(0.15)
+                  //           : kTextFieldColor.withOpacity(0.3),
+                  //           shape: BoxShape.circle,
+                  //         ),
+                  //         child: Icon(Icons.check, color: product.isFavourite
+                  //         ? Color(0xFFFF4848)
+                  //         : Colors.white),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // )
+                ],
               ),
-              
+            ),
+          ),
         ),
       ),
     );
   }
 }
-
