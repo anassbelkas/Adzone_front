@@ -1,6 +1,7 @@
 import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({
@@ -20,16 +21,16 @@ class SectionTitle extends StatelessWidget {
           Text(
             text,
             style: TextStyle(
-              fontSize: getProportionateScreenWidth(18),
-              color: Colors.black,
+              fontSize: 16.sp,
+              color: kGreyColor,
               fontWeight: FontWeight.bold
             ),
           ),
           GestureDetector(
             onTap: press,
             child: Text(
-              "See more",
-              style: TextStyle(fontWeight: FontWeight.w600, color: kPrimaryColor),
+              "View all",
+              style: TextStyle(fontWeight: FontWeight.w600, color: kPrimaryColor, decoration: TextDecoration.underline),
             ),
           ),
         ],

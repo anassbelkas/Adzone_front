@@ -14,6 +14,7 @@ const kTextFieldColor = Color.fromARGB(255, 200, 200, 200);
 const kadzone = Color(0xFFFAF7F2);
 const kadzone2 = Color.fromARGB(255, 255, 198, 170);
 const kadzone3 = Color.fromARGB(255, 255, 182, 145);
+const kGreenColor = Color.fromARGB(255, 72, 229, 88);
 
 const kDefaultPadding = EdgeInsets.symmetric(horizontal: 30);
 

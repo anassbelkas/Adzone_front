@@ -25,7 +25,7 @@ class ProductDescription extends StatelessWidget {
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("${product.price} Points", style: TextStyle(fontSize: getProportionateScreenWidth(20), fontWeight: FontWeight.w600, color: kPrimaryColor),),
+                    Text("${product.price} Points", style: TextStyle(fontSize: getProportionateScreenWidth(20), fontWeight: FontWeight.w600, color: kGreenColor),),
                   ],
               ),
             ],

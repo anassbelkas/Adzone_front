@@ -57,7 +57,7 @@ class _SttingsState extends State<Settings> {
                 child: FlatButton(
                   padding: EdgeInsets.all(20),
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  color: Color.fromARGB(255, 255, 243, 240),
+                  // color: Color.fromARGB(255, 255, 243, 240),
                   onPressed: () {},
                   child: Row(
                     children: [
@@ -82,7 +82,7 @@ class _SttingsState extends State<Settings> {
                     child: FlatButton(
                       padding: EdgeInsets.all(20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      color: Color.fromARGB(255, 255, 243, 240),
+                      // color: Color.fromARGB(255, 255, 243, 240),
                       onPressed: () {},
                       child: Row(
                         children: [
@@ -107,7 +107,7 @@ class _SttingsState extends State<Settings> {
                     child: FlatButton(
                       padding: EdgeInsets.all(20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      color: Color.fromARGB(255, 255, 243, 240),
+                      // color: Color.fromARGB(255, 255, 243, 240),
                       onPressed: () {},
                       child: Row(
                         children: [
@@ -132,7 +132,7 @@ class _SttingsState extends State<Settings> {
                     child: FlatButton(
                       padding: EdgeInsets.all(20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      color: Color.fromARGB(255, 255, 243, 240),
+                      // color: Color.fromARGB(255, 255, 243, 240),
                       onPressed: () {},
                       child: Row(
                         children: [
@@ -157,7 +157,7 @@ class _SttingsState extends State<Settings> {
                     child: FlatButton(
                       padding: EdgeInsets.all(20),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      color: Color.fromARGB(255, 255, 243, 240),
+                      // color: Color.fromARGB(255, 255, 243, 240),
                       onPressed: () {},
                       child: Row(
                         children: [

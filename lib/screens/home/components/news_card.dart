@@ -1,4 +1,6 @@
+import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
@@ -12,11 +14,11 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.w),
             child: FlatButton(
-              padding: EdgeInsets.all(20),
+              padding: EdgeInsets.all(3.w),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              color: Color.fromARGB(255, 255, 243, 240),
+              // color: kWhiteColor,
               onPressed: press,
               child: Row(
                 children: [
@@ -24,15 +26,15 @@ class NewsCard extends StatelessWidget {
                     icon,
                     width: 100,
                   ),
-                  SizedBox(width: 20),
+                  SizedBox(width: 4.w),
                   Expanded(child: Column(
                     children: [
-                      Text(title, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
+                      Text(title, style: TextStyle(fontSize: 11.sp, fontWeight: FontWeight.bold),),
                       SizedBox(height: 5,),
-                      Text(text, style: TextStyle(fontSize: 12), maxLines: 3,),
+                      Text(text, style: TextStyle(fontSize: 9.sp), maxLines: 3,),
                     ],
                   )),
-                  Icon(Icons.arrow_forward_ios),
+                  Icon(Icons.arrow_forward_ios, color: kPrimaryColor,),
                 ],
               ),
             ),

@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'DM Sans'),
-        home: Welcome(),
+        home: Navbar(),
         routes: routes,
       );
     }));

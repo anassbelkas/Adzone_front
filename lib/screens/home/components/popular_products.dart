@@ -4,6 +4,7 @@ import 'package:adzone/screens/home/components/product_card.dart';
 import 'package:adzone/screens/home/components/section_title.dart';
 import 'package:adzone/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class PopularProducts extends StatelessWidget {
   const PopularProducts({
@@ -15,7 +16,7 @@ class PopularProducts extends StatelessWidget {
     return Column(
       children: [
         SectionTitle(text: "Popular Rewards", press: () {}),
-        SizedBox(height: getProportionateScreenWidth(20),),
+        SizedBox(height: 5.w,),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
