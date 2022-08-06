@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:adzone/theme.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:sizer/sizer.dart';
 
 class Rewards extends StatefulWidget {
   @override
@@ -68,23 +69,23 @@ class _RewardsState extends State<Rewards> {
         child: Column(
           children: [
             Container(
-              height: 85,
+              height: 15.h,
               child: Stack(
                 children: [
                   Positioned(
-                      top: -15,
-                      left: -15,
+                      top: -7.h,
+                      left: -4.w,
                       child: Container(
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Color(0xFFFA7850)),
-                        width: 100,
-                        height: 100,
+                            shape: BoxShape.circle, color: kPrimaryColor),
+                        width: 25.w,
+                        height: 25.h,
                         child: TextButton(
                             style: TextButton.styleFrom(
                                 minimumSize: Size.zero,
                                 padding: EdgeInsets.zero,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                primary: Colors.white),
+                                primary: kWhiteColor),
                             onPressed: () => Navigator.of(context).pop(),
                             child: Icon(IconData(0xe092,
                                 fontFamily: 'MaterialIcons',
@@ -96,15 +97,15 @@ class _RewardsState extends State<Rewards> {
             Center(
               child: Text(
                 "Claimed Rewards",
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 5.h, fontWeight: FontWeight.w600),
               ),
             ),
             SizedBox(
-              height: 25,
+              height: 3.h,
             ),
             SingleChildScrollView(
               child: Container(
-                height: 50,
+                height: 7.h,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: categories.length,
@@ -113,7 +114,7 @@ class _RewardsState extends State<Rewards> {
                           child: Row(
                         children: [
                           SizedBox(
-                            width: 8,
+                            width: 1.w,
                           ),
                           ElevatedButton(
                             onPressed: () {
@@ -123,46 +124,49 @@ class _RewardsState extends State<Rewards> {
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 0,
-                              padding: EdgeInsets.all(12),
+                              padding: EdgeInsets.all(3.w),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
+                                borderRadius: BorderRadius.circular(4.w),
                               ),
                               side: BorderSide(
-                                  width: 1,
+                                  width: 0.25.w,
                                   color: selectedButton == index
-                                      ? Color(0xFFFA7850)
-                                      : Color.fromARGB(255, 200, 200, 200)),
+                                      ? kPrimaryColor
+                                      : kTextFieldColor),
                               primary: selectedButton == index
-                                  ? Color(0xFFFA7850)
-                                  : Colors.white,
+                                  ? kPrimaryColor
+                                  : kWhiteColor,
                             ),
                             child: Row(children: [
                               Icon(
                                 categories[index]['iconPath'],
                                 color: selectedButton == index
-                                    ? Colors.white
-                                    : Colors.black,
+                                    ? kWhiteColor
+                                    : kBlackColor,
                               ),
                               SizedBox(
-                                width: 10,
+                                width: 2.5.w,
                               ),
                               Text(
                                 categories[index]['name'],
                                 style: TextStyle(
                                     color: selectedButton == index
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontSize: 18),
+                                        ? kWhiteColor
+                                        : kBlackColor,
+                                    fontSize: 2.5.h),
                               )
                             ]),
-                          )
+                          ),
+                          SizedBox(
+                            width: 1.w,
+                          ),
                         ],
                       ));
                     }),
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 1.h,
             ),
             Expanded(
               child: ListView.builder(
@@ -170,27 +174,27 @@ class _RewardsState extends State<Rewards> {
                 itemCount: claimedRewards.length,
                 itemBuilder: ((context, index) {
                   return Container(
-                    margin: EdgeInsets.only(left: 15, right: 15, bottom: 3),
-                    padding: EdgeInsets.all(12),
-                    height: 150,
+                    margin:
+                        EdgeInsets.only(left: 3.w, right: 3.w, bottom: 0.5.h),
+                    padding: EdgeInsets.all(3.w),
+                    height: 22.h,
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
+                            color: kGreyColor.withOpacity(0.5),
+                            spreadRadius: 0.5.w,
+                            blurRadius: 1.25.w,
                           )
                         ],
-                        color: Color(0xFFFAF7F2),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                        color: kadzone,
+                        borderRadius: BorderRadius.all(Radius.circular(5.w))),
                     child: Row(children: [
                       Container(
-                        width: 120,
-                        height: 120,
+                        width: 30.w,
                         child: Image(image: AssetImage("images/_home.png")),
                       ),
                       SizedBox(
-                        width: 10,
+                        width: 2.5.w,
                       ),
                       Expanded(
                         child: Column(
@@ -200,38 +204,38 @@ class _RewardsState extends State<Rewards> {
                           children: [
                             Text(claimedRewards[index]['name'],
                                 style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold)),
+                                    fontSize: 3.h,
+                                    fontWeight: FontWeight.bold)),
                             Flexible(
                               child: Text(claimedRewards[index]['description'],
                                   style: TextStyle(
-                                      fontSize: 13,
+                                      fontSize: 1.8.h,
                                       fontWeight: FontWeight.w100,
-                                      color: Color(0xFF5B5B5B))),
+                                      color: kZambeziColor)),
                             ),
                             Container(
                               child: Row(children: [
                                 Text(
                                     claimedRewards[index]['points'] + ' Points',
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 2.5.h,
                                         fontWeight: FontWeight.w300,
-                                        color:
-                                            Color.fromARGB(255, 48, 136, 51))),
+                                        color: kGreenColor)),
                                 Spacer(),
                                 ElevatedButton(
                                   onPressed: () {},
                                   style: ElevatedButton.styleFrom(
                                       elevation: 0,
-                                      padding:
-                                          EdgeInsets.only(left: 20, right: 20),
+                                      padding: EdgeInsets.only(
+                                          left: 5.w, right: 5.w),
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(10.0),
+                                            BorderRadius.circular(2.5.w),
                                       ),
-                                      primary: Color(0xFFFA7850)),
+                                      primary: kPrimaryColor),
                                   child: Text(
                                     'View',
-                                    style: TextStyle(fontSize: 18),
+                                    style: TextStyle(fontSize: 2.5.h),
                                   ),
                                 )
                               ]),

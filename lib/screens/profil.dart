@@ -45,7 +45,7 @@ class Profil extends StatelessWidget {
             Icon(Iconsax.arrow_right_3, color: kPrimaryColor),
           ]),
           // margin: const EdgeInsets.all(8),
-          padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 2.h)),
+          padding: EdgeInsets.symmetric(horizontal: 1.w, vertical: 1.9.h)),
     );
   }
 
@@ -65,24 +65,16 @@ class Profil extends StatelessWidget {
     };
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2.w, vertical: 2.h),
-        child: Stack(
+        padding: EdgeInsets.only(left: 2.w, right: 2.w, top: 1.h),
+        child: Column(
           children: [
-            Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
-                  child: _primaryButton,
-                )),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 4.h),
+              padding: EdgeInsets.only(left: 3.w, right: 3.w, top: 4.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   AvatarHead(),
-                  SizedBox(height: 3.h),
+                  SizedBox(height: 1.h),
                   profileLinks(context, 'Saved Locations', Iconsax.location,
                       onTap: () {}),
                   profileLinks(context, 'Claimed Rewards',
@@ -111,6 +103,14 @@ class Profil extends StatelessWidget {
                       onTap: () {}),
                 ],
               ),
+            ),
+            Container(
+              padding: EdgeInsets.only(
+                left: 3.w,
+                right: 3.w,
+                top: 1.h,
+              ),
+              child: _primaryButton,
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:adzone/theme.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:flutter_tabler_icons/flutter_tabler_icons.dart';
+import 'package:sizer/sizer.dart';
 
 class Achievements extends StatelessWidget {
   List<Map> achievements = [
@@ -100,23 +101,23 @@ class Achievements extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              height: 85,
+              height: 15.h,
               child: Stack(
                 children: [
                   Positioned(
-                      top: -15,
-                      left: -15,
+                      top: -7.h,
+                      left: -4.w,
                       child: Container(
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Color(0xFFFA7850)),
-                        width: 100,
-                        height: 100,
+                            shape: BoxShape.circle, color: kPrimaryColor),
+                        width: 25.w,
+                        height: 25.h,
                         child: TextButton(
                             style: TextButton.styleFrom(
                                 minimumSize: Size.zero,
                                 padding: EdgeInsets.zero,
                                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                                primary: Colors.white),
+                                primary: kWhiteColor),
                             onPressed: () => Navigator.of(context).pop(),
                             child: Icon(IconData(0xe092,
                                 fontFamily: 'MaterialIcons',
@@ -128,14 +129,14 @@ class Achievements extends StatelessWidget {
             Center(
               child: Text(
                 "Achievements",
-                style: TextStyle(fontSize: 35, fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 5.h, fontWeight: FontWeight.w600),
               ),
             ),
             SizedBox(
-              height: 25,
+              height: 3.h,
             ),
             SizedBox(
-              height: 5,
+              height: 1.h,
             ),
             Expanded(
               child: ListView.builder(
@@ -143,32 +144,36 @@ class Achievements extends StatelessWidget {
                 itemCount: achievements.length,
                 itemBuilder: ((context, index) {
                   return Container(
-                      margin: EdgeInsets.only(left: 15, right: 15, bottom: 3),
-                      height: 50,
+                      margin:
+                          EdgeInsets.only(left: 3.w, right: 3.w, bottom: 0.5.h),
+                      height: 7.h,
                       child: Stack(
                         children: [
                           Row(children: [
                             Icon(
                               achievements[index]['iconPath'],
                               color: achievements[index]['iconColor'],
-                              size: 40,
+                              size: 10.w,
                             ),
                             Text(
                               achievements[index]['name'],
-                              style: TextStyle(fontSize: 15),
+                              style: TextStyle(fontSize: 2.2.h),
                             ),
                             Spacer(),
                             Container(
-                              margin: EdgeInsets.only(right: 5),
+                              margin: EdgeInsets.only(right: 1.25.w),
                               padding: EdgeInsets.only(
-                                  top: 3, bottom: 3, left: 8, right: 8),
+                                  top: 0.4.h,
+                                  bottom: 0.4.h,
+                                  left: 2.w,
+                                  right: 2.w),
                               decoration: BoxDecoration(
                                   color: achievements[index]['progression'] ==
                                           achievements[index]['goal']
-                                      ? Color(0xFFFA7850)
-                                      : Color.fromARGB(255, 200, 200, 200),
+                                      ? kPrimaryColor
+                                      : kTextFieldColor,
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
+                                      BorderRadius.all(Radius.circular(5.w))),
                               child: Text(
                                   achievements[index]['progression'] +
                                       '/' +
@@ -177,19 +182,19 @@ class Achievements extends StatelessWidget {
                                       color: achievements[index]
                                                   ['progression'] ==
                                               achievements[index]['goal']
-                                          ? Colors.white
-                                          : Colors.black)),
+                                          ? kWhiteColor
+                                          : kBlackColor)),
                             ),
                           ]),
                           achievements[index]['progression'] ==
                                   achievements[index]['goal']
                               ? Positioned(
-                                  top: -2,
-                                  right: -4,
+                                  top: -0.3.h,
+                                  right: -1.w,
                                   child: Icon(
                                       IconData(0xe156,
                                           fontFamily: 'MaterialIcons'),
-                                      color: Color.fromARGB(255, 6, 202, 13)))
+                                      color: kGreenColor))
                               : Container(),
                         ],
                       ));
