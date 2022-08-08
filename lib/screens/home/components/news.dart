@@ -2,8 +2,10 @@ import 'package:adzone/models/news.dart';
 import 'package:adzone/screens/home/components/news_card.dart';
 import 'package:adzone/screens/home/components/section_title.dart';
 import 'package:adzone/screens/the_news/news_screen.dart';
+import 'package:adzone/screens/view_all_news.dart';
 import 'package:adzone/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class News extends StatelessWidget {
   const News({
@@ -14,8 +16,8 @@ class News extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SectionTitle(text: "News", press: () {}),
-        SizedBox(height: getProportionateScreenWidth(20),),
+        SectionTitle(text: "News", press: () {Navigator.push(context,MaterialPageRoute(builder: (context) => ViewAllNews()),);}),
+        SizedBox(height: 5.w,),
               ...List.generate(
                 demoNews.length, 
                 (index) {
@@ -28,7 +30,7 @@ class News extends StatelessWidget {
                     );
                 },
               ),
-        SizedBox(height: getProportionateScreenWidth(20),),
+        SizedBox(height: 5.w,),
       ],
     );
   }

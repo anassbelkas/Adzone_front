@@ -1,6 +1,7 @@
 import 'package:adzone/models/news.dart';
 import 'package:adzone/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class NewsImage extends StatelessWidget {
   final int selectedimage = 0;
@@ -16,7 +17,7 @@ class NewsImage extends StatelessWidget {
     return Column(
       children: [
         SizedBox(
-          width: getProportionateScreenWidth(300),
+          width: 90.w,
           child: AspectRatio(aspectRatio: 1, child: Image.asset(news.images[selectedimage]),),
         ),
         Row()

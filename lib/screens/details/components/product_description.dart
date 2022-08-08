@@ -2,6 +2,7 @@ import 'package:adzone/models/product.dart';
 import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class ProductDescription extends StatelessWidget {
   const ProductDescription({
@@ -18,25 +19,25 @@ class ProductDescription extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20),vertical: getProportionateScreenWidth(10)),
+          padding: EdgeInsets.symmetric(horizontal: 5.w,vertical: 1.w),
           child: Column(
             children: [
               Text(product.title, style: Theme.of(context).textTheme.headline6, maxLines: 2,),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("${product.price} Points", style: TextStyle(fontSize: getProportionateScreenWidth(20), fontWeight: FontWeight.w600, color: kGreenColor),),
+                    Text("${product.price} Points", style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.w600, color: kGreenColor),),
                   ],
               ),
             ],
           ),
         ),
-        const SizedBox(height: 5,),
+        
         Align(
           alignment: Alignment.centerRight,
           child: Container(
-            padding: EdgeInsets.all(getProportionateScreenWidth(15)),
-            width: getProportionateScreenWidth(64),
+            padding: EdgeInsets.all(4.w),
+            width: 16.w,
             decoration: BoxDecoration(
               color: product.isFavourite ? Color(0xFFFFE6E6) : kTextFieldColor.withOpacity(0.3),
               borderRadius: BorderRadius.only(
@@ -49,8 +50,8 @@ class ProductDescription extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(20),
-            right: getProportionateScreenWidth(64),
+            left: 5.w,
+            right: 8.w,
           ),
           child: Text(
             product.description,
@@ -58,13 +59,13 @@ class ProductDescription extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20), vertical: 10),
+          padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 3.w),
           child: GestureDetector(
             onTap: pressOnSeeMore,
             child: Row(
               children: [
                 Text("See more details", style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.w600),),
-                SizedBox(height: 5,),
+                SizedBox(height: 2.w,),
                 Icon(Icons.arrow_forward_ios, size: 12, color: kPrimaryColor,),
               ],
             ),

@@ -1,6 +1,7 @@
 import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class IconBtnWithCounter extends StatelessWidget {
   const IconBtnWithCounter({
@@ -21,9 +22,9 @@ class IconBtnWithCounter extends StatelessWidget {
         overflow: Overflow.visible,
         children: [
           Container(
-              padding: EdgeInsets.all(getProportionateScreenWidth(12)),
-              height: getProportionateScreenWidth(46),
-              width: getProportionateScreenWidth(46),
+              padding: EdgeInsets.all(2.w),
+              height: 12.w,
+              width: 12.w,
               decoration: BoxDecoration(
                 color: kGreyColor.withOpacity(0.1),
                 shape: BoxShape.circle,
@@ -34,8 +35,8 @@ class IconBtnWithCounter extends StatelessWidget {
               top: -3,
               right: 0,
               child: Container(
-                height: getProportionateScreenHeight(16),
-                width: getProportionateScreenWidth(16),
+                height: 5.w,
+                width: 5.w,
                 decoration: BoxDecoration(
                   color: Color(0xFFFF4848),
                   shape: BoxShape.circle,
@@ -45,8 +46,7 @@ class IconBtnWithCounter extends StatelessWidget {
                   child: Text(
                     "$numOfItems",
                     style: TextStyle(
-                      fontSize: getProportionateScreenWidth(10),
-                      height: 1,
+                      fontSize: 8.sp,
                       color: kWhiteColor,
                       fontWeight: FontWeight.w600,
                     ),

@@ -2,6 +2,7 @@
 import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({
@@ -11,7 +12,7 @@ class SearchField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: SizeConfig.screenWidth * 0.75, //60% of our width
+      width: 75.w, //60% of our width
       // height: 50,
       decoration: BoxDecoration(
         color: kGreyColor.withOpacity(0.1),
@@ -27,8 +28,8 @@ class SearchField extends StatelessWidget {
             hintText: "Search Reward",
             prefixIcon: Icon(Icons.search),
             contentPadding: EdgeInsets.symmetric(
-              horizontal: getProportionateScreenWidth(20),
-              vertical: getProportionateScreenWidth(9),
+              horizontal: 2.w,
+              vertical: 4.w,
               )
           ),
         ),

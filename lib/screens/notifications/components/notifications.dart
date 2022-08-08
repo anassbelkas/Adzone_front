@@ -2,6 +2,7 @@ import 'package:adzone/models/notification.dart';
 import 'package:adzone/screens/notifications/components/notification_card.dart';
 import 'package:adzone/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Notifications extends StatelessWidget {
   const Notifications({
@@ -12,7 +13,7 @@ class Notifications extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: getProportionateScreenWidth(20),),
+        SizedBox(height: (5.w),),
               ...List.generate(
                 demoNotification.length, 
                 (index) {
@@ -24,7 +25,7 @@ class Notifications extends StatelessWidget {
                     );
                 },
               ),
-        SizedBox(height: getProportionateScreenWidth(20),),
+        SizedBox(height: 5.w,),
       ],
     );
   }

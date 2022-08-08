@@ -2,6 +2,7 @@ import 'package:adzone/screens/home/components/section_title.dart';
 import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 
 class Categories extends StatelessWidget {
@@ -12,14 +13,14 @@ class Categories extends StatelessWidget {
       {"icon": Icon(Icons.data_exploration, color: Colors.blue.shade900,), "text": "Data", "color": Colors.blue.shade100},
       {"icon": Icon(Icons.videogame_asset, color: Colors.green.shade900,), "text": "Gaming", "color": Colors.green.shade100},
       {"icon": Icon(Icons.fastfood, color: Colors.amber.shade900,), "text": "Food", "color": Colors.amber.shade100},
-      {"icon": Icon(Icons.more_horiz, color: Colors.purple.shade900,), "text": "More", "color": Colors.purple.shade100},
+      {"icon": Icon(Icons.window_rounded, color: Colors.purple.shade900,), "text": "Misc", "color": Colors.purple.shade100},
     ];
     return Column(
       children: [
         SectionTitle(text: "Reward Categories", press: () {}),
-        SizedBox(height: getProportionateScreenWidth(20),),
+        SizedBox(height: 4.w,),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          padding: EdgeInsets.symmetric(horizontal: 5.w),
           child: Column(
             children: [
               Row(
@@ -62,13 +63,13 @@ final Icon icon;
     return GestureDetector(
       onTap: press,
       child: SizedBox(
-        width: getProportionateScreenWidth(55),
+        width: 17.w,
         child: Column(
           children: [
             AspectRatio(
               aspectRatio: 1,
               child: Container(
-                padding: EdgeInsets.all(getProportionateScreenWidth(15)),
+                padding: EdgeInsets.all(4.w),
                 decoration: BoxDecoration(
                   color: color,
                   borderRadius: BorderRadius.circular(10),
@@ -76,7 +77,7 @@ final Icon icon;
                 child: icon,
               ),
             ),
-            const SizedBox(height: 6,),
+            SizedBox(height: 2.w,),
             Text(text, textAlign: TextAlign.center, style: TextStyle(fontWeight: FontWeight.bold),),
           ],
         ),

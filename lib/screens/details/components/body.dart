@@ -6,6 +6,7 @@ import 'package:adzone/size_config.dart';
 import 'package:adzone/theme.dart';
 import 'package:adzone/widgets/navbar.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 import 'product_image.dart';
 
@@ -19,17 +20,17 @@ class Body extends StatelessWidget {
     return Column(
       children: [
         Container(
-              height: 85,
+              height: 22.w,
               child: Stack(
                 children: [
                   Positioned(
-                      top: -15,
-                      left: -15,
+                      top: -8.h,
+                      left: -4.w,
                       child: Container(
                         decoration: BoxDecoration(
                             shape: BoxShape.circle, color: Color(0xFFFA7850)),
-                        width: 100,
-                        height: 100,
+                        width: 25.w,
+                        height: 25.h,
                         child: TextButton(
                             style: TextButton.styleFrom(
                                 minimumSize: Size.zero,
@@ -55,9 +56,9 @@ class Body extends StatelessWidget {
         
         //btn
         TopRoundedContainer(
-          color: Color.fromARGB(255, 255, 251, 250),
+          color: kWhiteColor,
           child: Padding(
-            padding: EdgeInsets.only(left: SizeConfig.screenWidth * 0.15, right: SizeConfig.screenWidth * 0.15, top: getProportionateScreenWidth(15), bottom: getProportionateScreenWidth(40),),
+            padding: EdgeInsets.only(left: 15.w, right: 15.w, top: 2.w,),
             child: ElevatedButton(
               onPressed: (){
                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => Navbar(),),);
@@ -68,10 +69,10 @@ class Body extends StatelessWidget {
                 shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)))
               ),
               child: Padding(
-                padding: EdgeInsets.all(14),
+                padding: EdgeInsets.all(4.w),
                 child: Text(
                   'Buy',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold),
                 )
                 ),
               ),

@@ -1,11 +1,10 @@
 import 'package:adzone/screens/home/components/categories.dart';
 import 'package:adzone/screens/home/components/news.dart';
 import 'package:adzone/screens/home/components/popular_products.dart';
-import 'package:adzone/screens/home/components/popular_rewards.dart';
-import 'package:adzone/screens/home/components/surprise_banner.dart';
 import 'package:adzone/screens/home/components/home_header.dart';
 import 'package:adzone/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class Body extends StatelessWidget {
 
@@ -15,19 +14,15 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: getProportionateScreenWidth(20),),
+            SizedBox(height: 5.w,),
             HomeHeader(),
-            // SizedBox(height: getProportionateScreenWidth(30),),
-            // SurpriseBanner(),
-            // SizedBox(height: getProportionateScreenWidth(30),),
-            // PopularRewards(),
-            SizedBox(height: getProportionateScreenWidth(30),),
+            SizedBox(height: 5.w,),
             PopularProducts(),
-            SizedBox(height: getProportionateScreenWidth(30),),
+            SizedBox(height: 6.w,),
             Categories(),
-            SizedBox(height: getProportionateScreenWidth(30),),
+            SizedBox(height: 6.w,),
             News(),
-            SizedBox(height: getProportionateScreenWidth(30),),
+            SizedBox(height: 5.w,),
           ],
         ),
       ),
