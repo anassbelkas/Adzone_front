@@ -1,20 +1,19 @@
-# login_signup_ui_flutter
-![Uploading ui desaign.png…]()
+# Adzone app
 
+ADZONE is an augmented reality application that aims to give life
+advertisements in a way that benefits both the user and
+the advertiser. The advertiser publishes the product and the user is
+rewarded with predetermined rewards.
+The app uses AR technology to detect a poster
+advertising and displays an advertising video in the augmented world. Whether
+the user completes the entire ad, he gets different
+rewards, coupons, points that can be redeemed for
+diverse rewards (to real money which can be withdrawn when it
+reaches a certain threshold).
 
-Desaign: https://bit.ly/3aQf66x
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![splash screen](https://i.imgur.com/3jabU8V.png)
+![sign in](https://i.imgur.com/KGePSn0.png)
+![sign up](https://i.imgur.com/vfTtBE0.png)
+![otp](https://i.imgur.com/16lJt81.png)
+![home](https://i.imgur.com/F0xGgZM.png)
+![profile](https://i.imgur.com/PJ2vwlD.png)
